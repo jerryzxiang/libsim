@@ -8,9 +8,10 @@ import pprint
 
 def dictTest():
     thisdict = {
-    "brand": "Ford",
-    "model": "Mustang",
-    "year": 1964
+    "LFP": [],
+    "NMC": [],
+    "LCO": [],
+    "NCA": [],
     }
     return thisdict
 
