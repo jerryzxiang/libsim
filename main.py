@@ -65,7 +65,9 @@ class Electrode:
     def mesh_initialize(self,length,n_elements,n_timestep,initial_concentration):
         self.Mesh=Mesh1D_SPM(n_timestep)
         self.Mesh.add_nodes(length,n_elements,initial_concentration)
-        
+    
+    def get_voltage(concentration):
+        return voltage
 
         
 
