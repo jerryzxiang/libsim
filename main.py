@@ -6,6 +6,7 @@ Main file containing several classes and their definitions
 
 import numpy as np
 import math
+import scipy.interpolate
 
 # constant
 FARADAY_NUMBER=9.64853399e4
@@ -36,6 +37,9 @@ DT=0.001
 
 # number of time steps rounded down to nearest integer
 n_timestep=math.floor(SIMULATION_TIME/DT)
+
+# time history
+time_history = np.arange(0, DT, SIMULATION_TIME)
 
 class BatteryCell():
     '''
@@ -111,11 +115,24 @@ class Electrode():
         '''
         self.Mesh=Mesh1D_SPM(n_timestep)
         self.Mesh.add_nodes(length,n_elements,initial_concentration)
-    
-    def get_voltage(concentration):
+
+    def electrode_potential(self,concentration_list, potential_ref, concentration):
+        '''
+        
+        '''
+        potential = np.array(len(time_history))
+        for i in range(len(time_history)):
+            potential[i] = scipy.interpolate.PchipInterpolator(concentration_list, potential_ref, axis = 0)
+        return potential
+
+
+    def get_voltage(self,cathode_potential, anode_potential, INPUT_CURRENT, internal_resistance):
         '''
         Returns voltage from input concentration
         '''
+        potential_diff = cathode_potential - anode_potential
+        internal_potential = INPUT_CURRENT*internal_resistance
+        voltage = potential_diff + internal_potential
         return voltage
 
         
@@ -281,14 +298,14 @@ battery_cell.create_cathode(1.736e-14,1.637e-7,1.035e4)
 battery_cell.create_anode(8.275e-14,3.600e-6,2.948e4)
 
 #Reference potentials for the electrodes
-battery_cell.cathode.create_potential_lookup_tables([5.502, 4.353, 3.683, 3.554, 3.493, 3.4, 
+cathode_potential_ref = battery_cell.cathode.create_potential_lookup_tables([5.502, 4.353, 3.683, 3.554, 3.493, 3.4, 
                                       3.377,3.364, 3.363, 3.326,3.324, 3.322, 
                                       3.321, 3.316, 3.313, 3.304, 3.295, 3.293,
                                       3.290,3.279 ,3.264,3.261,3.253, 3.245, 
                                       3.238, 3.225, 3.207, 2.937, 2.855, 2.852,
                                       1.026, -1.12,-1.742])
 
-battery_cell.anode.create_potential_lookup_tables([3.959, 3.4, 1.874, 9.233e-1, 9.074e-1, 
+anode_potential_ref = battery_cell.anode.create_potential_lookup_tables([3.959, 3.4, 1.874, 9.233e-1, 9.074e-1, 
                                     6.693e-1,2.481e-3,1.050e-3,1.025e-3, 8.051e-4,
                                     5.813e-4, 2.567e-4, 2.196e-4, 1.104e-4,
                                     3.133e-6,1.662e-6,9.867e-7, 3.307e-7, 1.57e-7,
@@ -309,8 +326,8 @@ cathode.mesh_initialize(R_CATHODE, N_SEGMENTS, n_timestep, cathode_initial_c)
 
 #print(cathode.Mesh.second_derivative)
 second_derivative(cathode.Mesh,1.0,1)
-print(second_derivative(cathode.Mesh,1.0,1))
+#print(second_derivative(cathode.Mesh,1.0,1))
 
-
+cathode_potential = cathode.electrode_potential(cathode.concentration_list, cathode_potential_ref, cathode_initial_c)
 
 #compute the derivatives
