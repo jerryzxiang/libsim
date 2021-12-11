@@ -14,7 +14,7 @@ FARADAY_NUMBER=9.64853399e4
 # input current to the model
 # should be parsed as a command line arg
 INPUT_CURRENT=0.5 
-
+INTERNAL_RESISTANCE=0.150
 # input nominal capacity [Ah] to the model
 # should be parsed as a command line arg
 # dependent on cell type. This is for a 26650 cell
@@ -50,13 +50,13 @@ class BatteryCell():
     BatteryCell model class
     Contains ...
     '''
-    def __init__(self,capacity_amp_hour):
+    def __init__(self,capacity_amp_hour,internal_resistance):
         '''
         Initializes the BatteryCell class
         '''
         self.capacity_amp_hour=capacity_amp_hour
         self.capacity_coulomb=self.capacity_amp_hour*3600.0
-        
+        self.internal_resistance=internal_resistance
     def create_cathode(self,diffusivity,particle_radius,max_ion_concentration):
         '''
         Creates cathode containing the following parameters:
@@ -76,6 +76,16 @@ class BatteryCell():
         self.anode=Electrode(diffusivity,particle_radius,max_ion_concentration,
                              self.capacity_coulomb)
         self.anode.input_current=INPUT_CURRENT
+        
+    def get_voltage(self):
+            '''
+            Returns voltage from input concentration
+            '''
+            potential_diff = self.cathode.potential_history - (
+                self.anode.potential_history)
+            internal_potential = self.anode.input_current*self.internal_resistance
+            voltage = potential_diff + internal_potential
+            return voltage
             
 class Electrode():
     '''
@@ -159,8 +169,14 @@ class Electrode():
         arg2=second_derivative(self.Mesh,1.0,timestep_id)
         n_nodes=len(arg1)
         for i in range(1,self.Mesh.n_nodes-1):
-            self.Mesh.node_container[i].concentration[0,timestep_id]+=dt*(arg1[i]+
-                                                                       arg2[i])
+            node=self.Mesh.node_container[i]
+            r=node.x
+
+            r_squared=r**2
+            coef1=r_squared
+            coef2=r*self.diffusivity/r_squared
+            self.Mesh.node_container[i].concentration[0,timestep_id]+=dt*(coef1*
+                                                arg1[i]+coef2*arg2[i])
         
         self.Mesh.node_container[0].concentration[0,timestep_id]=(self.Mesh.
                                                                node_container[1].
@@ -334,7 +350,7 @@ def first_derivative(Mesh,coefficient,timestep):
 
 # how this would be run in a driver code
 capacity_amp_hour = 2.3
-battery_cell=BatteryCell(capacity_amp_hour)
+battery_cell=BatteryCell(capacity_amp_hour,INTERNAL_RESISTANCE)
 battery_cell.create_cathode(1.736e-14,1.637e-7,1.035e4)
 battery_cell.create_anode(8.275e-14,3.600e-6,2.948e4)
 
@@ -381,7 +397,8 @@ cathode_initial_c=cathode.concentration_list[28]
 cathode.mesh_initialize(R_CATHODE, N_SEGMENTS, n_timestep, cathode_initial_c)
 #print('cathode.Mesh=',cathode.Mesh.get_concentration_by_id())
 
-
+anode_initial_c=anode.concentration_list[6]
+anode.mesh_initialize(R_ANODE,N_SEGMENTS,n_timestep,anode_initial_c)
 second_derivative(cathode.Mesh,1.0,1)
 
 A_cathode = cathode.calculate_effective_area()
@@ -410,6 +427,7 @@ print(len(cathode_potential_ref_array))
 
 for i in range(n_timestep):
     cathode.simulation_step(i,DT)
+    anode.simulation_step(i,DT)
     
     
-plt.plot(cathode.potential_history)
+voltage=battery_cell.get_voltage()
