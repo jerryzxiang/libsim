@@ -7,7 +7,7 @@ Main file containing several classes and their definitions
 import numpy as np
 import math
 import scipy.interpolate
-
+import matplotlib.pyplot as plt
 # constant
 FARADAY_NUMBER=9.64853399e4
 
@@ -38,7 +38,7 @@ SIMULATION_TIME=10
 DT=0.001
 
 # number of time steps rounded down to nearest integer
-n_timestep=math.floor(SIMULATION_TIME/DT)
+n_timestep=math.ceil(SIMULATION_TIME/DT)
 print('n_timestep',n_timestep)
 
 # time history
@@ -65,6 +65,7 @@ class BatteryCell():
         '''
         self.cathode=Electrode(diffusivity,particle_radius,max_ion_concentration,
                                self.capacity_coulomb)
+        self.cathode.input_current=-INPUT_CURRENT
         
     def create_anode(self,diffusivity,particle_radius,max_ion_concentration):
         '''
@@ -74,6 +75,7 @@ class BatteryCell():
         '''
         self.anode=Electrode(diffusivity,particle_radius,max_ion_concentration,
                              self.capacity_coulomb)
+        self.anode.input_current=INPUT_CURRENT
             
 class Electrode():
     '''
@@ -92,8 +94,11 @@ class Electrode():
         self.charge=charge
         self.number_moles=self.charge/FARADAY_NUMBER
         self.volume=self.number_moles/self.max_ion_concentration
+      
+        #NEED TO REMOVE MAGIC NUMBERS!!
+        self.potential_history=np.empty([math.ceil(SIMULATION_TIME/DT),1])
         #self.effective_area=self.effective_area
-
+        self.effective_area=self.calculate_effective_area()
     
     def create_potential_lookup_tables(self,ref_list):
         '''
@@ -102,6 +107,8 @@ class Electrode():
         self.reference_potential=np.array(ref_list)
         #MAGIC NUMBER, NEED REMOVING
         self.concentration_list=np.linspace(0,self.max_ion_concentration,33)
+        self.potential_interpolator=scipy.interpolate.PchipInterpolator(
+            self.concentration_list, self.reference_potential)
     
     def calculate_effective_area(self):
         '''
@@ -123,9 +130,10 @@ class Electrode():
         self.Mesh=Mesh1D_SPM(n_timestep)
         self.Mesh.add_nodes(length,n_elements,initial_concentration)
 
-    def electrode_potential(self,concentration_list, potential_ref, concentrations_electrode):
+    def electrode_potential(self,concentration_list, potential_ref,
+                            concentrations_electrode):
         '''
-        
+    
         '''
         potential = np.zeros(len(time_history))
         for i in range(len(time_history)):
@@ -140,6 +148,33 @@ class Electrode():
         internal_potential = INPUT_CURRENT*internal_resistance
         voltage = potential_diff + internal_potential
         return voltage
+    
+    def set_input_current(self,input_current):
+        self.input_current=input_current
+    
+    def simulation_step(self,timestep_id,dt):
+        
+        
+        arg1=first_derivative(self.Mesh,1.0,timestep_id)
+        arg2=second_derivative(self.Mesh,1.0,timestep_id)
+        n_nodes=len(arg1)
+        for i in range(1,self.Mesh.n_nodes-1):
+            self.Mesh.node_container[i].concentration[0,timestep_id]+=dt*(arg1[i]+
+                                                                       arg2[i])
+        
+        self.Mesh.node_container[0].concentration[0,timestep_id]=(self.Mesh.
+                                                               node_container[1].
+                                                               concentration
+                                                               [0,timestep_id])
+        surface_c=(self.Mesh.dr*(self.input_current)/(self.effective_area*
+                                                      self.diffusivity*
+                                                      FARADAY_NUMBER)+
+            self.Mesh.node_container[n_nodes-2].concentration[0,timestep_id])
+        self.Mesh.node_container[n_nodes-1].concentration[0,timestep_id]=surface_c
+        self.potential_history[timestep_id]=self.potential_interpolator(surface_c)
+    
+                                                              
+        
 
         
 #Corresponding ion concentrations
@@ -209,10 +244,10 @@ class Mesh1D():
         Add nodes of a length with n_elements
         '''
         #helper variables
-        dr=length/n_elements
+        self.dr=length/n_elements
         x=0.0
         for i in range(n_elements+1):
-            self.add_node(x+i*dr)
+            self.add_node(x+i*self.dr)
             
 class Mesh1D_SPM(Mesh1D):
     '''
@@ -232,10 +267,10 @@ class Mesh1D_SPM(Mesh1D):
         Add nodes of a length with n_elements
         '''
         #helper variables
-        dr=length/n_elements
+        self.dr=length/n_elements
         x=0.0
         for i in range(n_elements+1):
-            self.add_node(x+i*dr,initial_concentration)
+            self.add_node(x+i*self.dr,initial_concentration)
                 
     def get_concentration_by_id(self,node_id,timestep):
         '''
@@ -344,7 +379,7 @@ concentrations_cathode[:,0] = cathode.concentration_list[28]
 cathode_initial_c=cathode.concentration_list[28]
 #print(cathode_initial_c)
 cathode.mesh_initialize(R_CATHODE, N_SEGMENTS, n_timestep, cathode_initial_c)
-print('cathode.Mesh=',cathode.Mesh.get_concentration_by_id())
+#print('cathode.Mesh=',cathode.Mesh.get_concentration_by_id())
 
 
 second_derivative(cathode.Mesh,1.0,1)
@@ -368,3 +403,13 @@ print(len(cathode_potential_ref_array))
 #print('cathode_potential', cathode_potential)
 
 #compute the derivatives
+
+
+
+#generate the time history:
+
+for i in range(n_timestep):
+    cathode.simulation_step(i,DT)
+    
+    
+plt.plot(cathode.potential_history)
