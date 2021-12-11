@@ -175,8 +175,9 @@ class Electrode():
             r_squared=r**2
             coef1=r_squared
             coef2=r*self.diffusivity/r_squared
-            self.Mesh.node_container[i].concentration[0,timestep_id]+=dt*(coef1*
-                                                arg1[i]+coef2*arg2[i])
+            self.Mesh.node_container[i].concentration[0,timestep_id]=(
+                self.Mesh.node_container[i].concentration[0,timestep_id-1]+
+                dt*(coef1 *arg1[i]+coef2 *arg2[i]))
         
         self.Mesh.node_container[0].concentration[0,timestep_id]=(self.Mesh.
                                                                node_container[1].
@@ -425,7 +426,7 @@ print(len(cathode_potential_ref_array))
 
 #generate the time history:
 
-for i in range(n_timestep):
+for i in range(1,n_timestep):
     cathode.simulation_step(i,DT)
     anode.simulation_step(i,DT)
     
