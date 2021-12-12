@@ -3,12 +3,12 @@ import sys
 # setting path
 sys.path.append('..')
 
-import main
+import libsim.main as main
 import csv
 #from math import isclose
 
 data = []
-with open('cath_conlist_default.csv') as f:
+with open('./tests/cath_conlist_default.csv') as f:
     reader = csv.reader(f)
     for row in reader:
         data.append(row)

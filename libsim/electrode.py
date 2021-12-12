@@ -8,10 +8,10 @@ Created on Sat Dec 11 16:55:25 2021
 import numpy as np
 import math
 import scipy.interpolate
-from mesh import Mesh1D_SPM as Mesh1D_SPM
+from .mesh import Mesh1D_SPM as Mesh1D_SPM
 
-from derivative import second_derivative
-from derivative import first_derivative
+from .derivative import second_derivative
+from .derivative import first_derivative
 
 
 

@@ -13,6 +13,8 @@ import math
 import scipy.interpolate
 import matplotlib.pyplot as plt
 
+from .electrode import Electrode as Electrode
+
 # constant
 FARADAY_NUMBER=9.64853399e4
 
@@ -41,7 +43,6 @@ SIMULATION_TIME=10
 
 
 
-from electrode import Electrode as Electrode
 
 class BatteryCell():
     '''
