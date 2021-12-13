@@ -7,7 +7,7 @@ Created on Sat Dec 11 16:59:37 2021
 """
 
 
-from node import Node_SPM as Node_SPM
+from libsim.node import Node_SPM as Node_SPM
 class Mesh1D():
     '''
     Mesh1D class
