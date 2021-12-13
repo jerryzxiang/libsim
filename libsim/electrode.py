@@ -8,10 +8,10 @@ Created on Sat Dec 11 16:55:25 2021
 import numpy as np
 import math
 import scipy.interpolate
-from .mesh import Mesh1D_SPM as Mesh1D_SPM
+from mesh import Mesh1D_SPM as Mesh1D_SPM
 
-from .derivative import second_derivative
-from .derivative import first_derivative
+from derivative import second_derivative
+from derivative import first_derivative
 
 
 
@@ -42,6 +42,12 @@ SIMULATION_TIME=10
 
 # change in time [seconds]
 DT=0.001
+
+# number of time steps rounded down to nearest integer
+n_timestep=math.ceil(SIMULATION_TIME/DT)
+
+# time history
+time_history = np.arange(0, SIMULATION_TIME, DT)
 
 class Electrode():
     '''
@@ -99,7 +105,7 @@ class Electrode():
     def electrode_potential(self,concentration_list, potential_ref,
                             concentrations_electrode):
         '''
-    
+        Interpolates concentration values between reference potentials
         '''
         potential = np.zeros(len(time_history))
         for i in range(len(time_history)):
@@ -119,8 +125,9 @@ class Electrode():
         self.input_current=input_current
     
     def simulation_step(self,timestep_id,dt):
-        
-        
+        '''
+        Simulates 
+        '''
         arg1=first_derivative(self.Mesh,1.0,timestep_id)
         arg2=second_derivative(self.Mesh,1.0,timestep_id)
         n_nodes=len(arg1)
