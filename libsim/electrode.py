@@ -1,20 +1,13 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Dec 11 16:55:25 2021
-
-@author: antti
-"""
+'''
+Electrode 
+'''
 import numpy as np
 import math
 import scipy.interpolate
-from libsim.mesh import Mesh1D_SPM as Mesh1D_SPM
+from mesh import Mesh1D_SPM as Mesh1D_SPM
 
-from libsim.derivative import second_derivative
-from libsim.derivative import first_derivative
-
-
-
+from derivative import second_derivative
+from derivative import first_derivative
 
 FARADAY_NUMBER=9.64853399e4
 # input current to the model

@@ -1,17 +1,14 @@
 """
-Main file containing several classes and their definitions
-
-? Should each individual class be split up into its own file ?
+Driver code file: currently using constants instead of immutable dict
 """
-
 import numpy as np
 import math
 import scipy.interpolate
 import matplotlib.pyplot as plt
-from libsim.batterycell import BatteryCell as BatteryCell
-from libsim.mesh import Mesh1D_SPM as Mesh1D_SPM
-from libsim.derivative import second_derivative
-from libsim.derivative import first_derivative
+from batterycell import BatteryCell as BatteryCell
+from mesh import Mesh1D_SPM as Mesh1D_SPM
+from derivative import second_derivative
+from derivative import first_derivative
 
 # constant
 FARADAY_NUMBER=9.64853399e4
@@ -49,7 +46,6 @@ print('n_timestep',n_timestep)
 # time history
 time_history = np.arange(0, SIMULATION_TIME, DT)
 print('time_history',time_history)
-
 
 #Corresponding ion concentrations
 #concentration_list_cathode=np.linspace(0, battery_cell.cathode.max_ion_concenctration,33)
@@ -91,40 +87,15 @@ anode=battery_cell.anode
 dr_cath = R_CATHODE/N_SEGMENTS
 r_cath = np.empty(len(time_history))
 
-
-#Initialize the cathode
-concentrations_cathode = np.zeros((N_SEGMENTS+1,len(time_history)))
-#print('length time history',len(time_history))
-#print('concentrations_cathode', concentrations_cathode)
-concentrations_cathode[:,0] = cathode.concentration_list[28]
-#print(concentrations_cathode[0,:])
-#print('concentrations_cathode', concentrations_cathode)
+# Initialize the cathode
 cathode_initial_c=cathode.concentration_list[28]
-#print(cathode_initial_c)
 cathode.mesh_initialize(R_CATHODE, N_SEGMENTS, n_timestep, cathode_initial_c)
-#print('cathode.Mesh=',cathode.Mesh.get_concentration_by_id())
-
+# initialize the anode
 anode_initial_c=anode.concentration_list[6]
 anode.mesh_initialize(R_ANODE,N_SEGMENTS,n_timestep,anode_initial_c)
 second_derivative(cathode.Mesh,1.0,1)
 
 A_cathode = cathode.calculate_effective_area()
-print('area cathode', A_cathode)
-
-#for i in range(len(time_history)):
-#    r_cath[i]=i*dr_cath
-
-#for i in range(len(time_history)):
-#    first_derivative(cathode.Mesh,1.0,i)
-#    second_derivative(cathode.Mesh,1.0,i)
-
-
-print('cathode.concentration_list:', cathode.concentration_list)
-print('cathode_initial_c', cathode_initial_c)
-print(len(cathode.concentration_list))
-print(len(cathode_potential_ref_array))
-#cathode_potential = cathode.electrode_potential(cathode.concentration_list, cathode_potential_ref_array, concentration)
-#print('cathode_potential', cathode_potential)
 
 #compute the derivatives
 

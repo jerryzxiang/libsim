@@ -1,13 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Dec 11 16:59:37 2021
+'''
+Mesh 
+'''
+from node import Node_SPM as Node_SPM
 
-@author: antti
-"""
-
-
-from libsim.node import Node_SPM as Node_SPM
 class Mesh1D():
     '''
     Mesh1D class

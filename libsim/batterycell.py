@@ -13,7 +13,7 @@ import math
 import scipy.interpolate
 import matplotlib.pyplot as plt
 
-from libsim.electrode import Electrode as Electrode
+from electrode import Electrode as Electrode
 
 # constant
 FARADAY_NUMBER=9.64853399e4

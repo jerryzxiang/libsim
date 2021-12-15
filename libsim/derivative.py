@@ -1,16 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Dec 11 17:03:26 2021
-
-@author: antti
-"""
-
-
+'''
+Derivative
+'''
 import numpy as np
-
-
-
 
 def first_derivative(Mesh,coefficient,timestep):  
     '''

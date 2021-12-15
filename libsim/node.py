@@ -1,11 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Dec 11 17:01:19 2021
-
-@author: antti
-"""
-
+'''
+Node
+'''
 import numpy as np
 
 

@@ -1,12 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Dec 11 20:53:05 2021
-
-@author: antti
-
-"""
-
+'''
+Node test
+'''
 import pytest
 from libsim.node import Node_SPM as Node_SPM
 

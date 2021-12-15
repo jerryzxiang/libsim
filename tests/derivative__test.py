@@ -1,16 +1,14 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Dec 12 13:08:14 2021
-
-@author: antti
-"""
+'''
+Derivative test file
+'''
 import pytest
 import numpy as np
 from libsim.mesh import Mesh1D_SPM as Mesh1D_SPM
 from libsim.derivative import first_derivative as first_derivative
 from libsim.derivative import second_derivative as second_derivative
-
+#import libsim.Mesh1D_SPM as Mesh1D_SPM
+#import first_derivative as first_derivative
+#import second_derivative as second_derivative
 
 length=10.0
 n_elements=10

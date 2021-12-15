@@ -1,11 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Dec 11 21:13:37 2021
-
-@author: antti
-"""
-
+'''
+Main test file
+'''
 import pytest
 
 from libsim.mesh import Mesh1D_SPM as Mesh1D_SPM

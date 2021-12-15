@@ -3,7 +3,7 @@ import sys
 # setting path
 sys.path.append('..')
 
-import libsim.main as main
+#import libsim.main
 import csv
 #from math import isclose
 
