@@ -89,7 +89,7 @@ battery_cell.anode.create_potential_lookup_tables(anode_potential_ref_array)
 cathode = battery_cell.cathode
 anode = battery_cell.anode
 
-#r_cath = np.empty(len(time_history))
+# r_cath = np.empty(len(time_history))
 
 # Initialize the cathode
 cathode_initial_c = cathode.concentration_list[28]
@@ -107,3 +107,8 @@ for i in range(1, n_timestep):
     anode.simulation_step(i, DT)
     
 voltage = battery_cell.get_voltage()
+
+# plotting voltage vs time
+plt.figure()
+plt.plot(time_history, voltage)
+plt.show()

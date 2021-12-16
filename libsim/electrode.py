@@ -116,18 +116,22 @@ class Electrode():
         Returns voltage from input concentration
         '''
         potential_diff = cathode_potential - anode_potential
-        internal_potential = INPUT_CURRENT*internal_resistance
+        internal_potential = INPUT_CURRENT * internal_resistance
         voltage = potential_diff + internal_potential
         return voltage
     
     def set_input_current(self, input_current):
-        self.input_current=input_current
+        '''
+        Sets input current
+        '''
+        self.input_current = input_current
     
     def simulation_step(self, timestep_id, dt):
         '''
         Simulates 
         '''
         arg1 = first_derivative(self.Mesh, 1.0, timestep_id)
+        print(arg1)
         arg2 = second_derivative(self.Mesh, 1.0, timestep_id)
         n_nodes = len(arg1)
         for i in range(1, self.Mesh.n_nodes - 1):
