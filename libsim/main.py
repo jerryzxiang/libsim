@@ -5,10 +5,10 @@ import numpy as np
 import math
 import scipy.interpolate
 import matplotlib.pyplot as plt
-from batterycell import BatteryCell as BatteryCell
-from mesh import Mesh1D_SPM as Mesh1D_SPM
-from derivative import second_derivative
-from derivative import first_derivative
+from libsim.batterycell import BatteryCell as BatteryCell
+from libsim.mesh import Mesh1D_SPM as Mesh1D_SPM
+from libsim.derivative import second_derivative
+from libsim.derivative import first_derivative
 
 # constant
 FARADAY_NUMBER = 9.64853399e4

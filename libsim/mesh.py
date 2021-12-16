@@ -1,8 +1,8 @@
 '''
 Mesh 
 '''
-from node import Node_SPM as Node_SPM
-from node import Node as Node
+from libsim.node import Node_SPM as Node_SPM
+from libsim.node import Node as Node
 
 class Mesh1D():
     '''
