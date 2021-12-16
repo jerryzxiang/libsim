@@ -156,4 +156,5 @@ class Electrode():
         # Set concentration at final node container to be surface concentration
         self.Mesh.node_container[n_nodes - 1].concentration[0, timestep_id] = surface_c
         # Fill out potential_history array at each timestep with interpolated value 
-        self.potential_history[timestep_id] = self.potential_interpolator(self.concentration_list, self.reference_potential)
+        #self.potential_history[timestep_id] = self.potential_interpolator(self.concentration_list, self.reference_potential)
+        self.potential_history[timestep_id] = self.potential_interpolator(surface_c)
