@@ -42,7 +42,7 @@ SIMULATION_TIME = 10
 DT = 0.001
 
 # number of time steps rounded down to nearest integer
-n_timestep = math.ceil(SIMULATION_TIME/DT)
+n_timestep = math.ceil(SIMULATION_TIME / DT)
 
 # time history
 time_history = np.arange(0, SIMULATION_TIME, DT)
@@ -134,7 +134,7 @@ class Electrode():
             node = self.Mesh.node_container[i]
             r = node.x
 
-            r_squared = r**2
+            r_squared = r ** 2
             coef1 = r_squared
             coef2 = r * self.diffusivity / r_squared
             self.Mesh.node_container[i].concentration[0, timestep_id] = (
@@ -147,4 +147,4 @@ class Electrode():
                         (self.effective_area * self.diffusivity * FARADAY_NUMBER) +
                         self.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])
         self.Mesh.node_container[n_nodes - 1].concentration[0, timestep_id] = surface_c
-        self.potential_history[timestep_id]=self.potential_interpolator(surface_c)
+        self.potential_history[timestep_id] = self.potential_interpolator(surface_c)

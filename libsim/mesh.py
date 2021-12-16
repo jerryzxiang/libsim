@@ -71,4 +71,3 @@ class Mesh1D_SPM(Mesh1D):
         Get concentration at a node, and return
         '''
         return self.node_container[node_id].concentration[0, timestep]
-        

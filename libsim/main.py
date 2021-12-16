@@ -36,6 +36,12 @@ D_CATHODE = 1.736e-14
 # particle radius in the cathode [meters]
 R_CATHODE = 1.637e-7
 
+# anode segment length
+dR_ANODE = R_CATHODE / N_SEGMENTS
+
+# cathode segment length
+dR_CATHODE = R_CATHODE / N_SEGMENTS
+
 # simulation time in [seconds]
 SIMULATION_TIME = 10 
 
@@ -43,7 +49,7 @@ SIMULATION_TIME = 10
 DT = 0.001
 
 # number of time steps rounded down to nearest integer
-n_timestep = math.ceil(SIMULATION_TIME/DT)
+n_timestep = math.ceil(SIMULATION_TIME / DT)
 
 # time history
 time_history = np.arange(0, SIMULATION_TIME, DT)
@@ -53,9 +59,10 @@ time_history = np.arange(0, SIMULATION_TIME, DT)
 #concentration_list_anode=np.linspace(0, battery_cell.anode.max_ion_concenctration,33
 
 # how this would be run in a driver code
-battery_cell = BatteryCell(CAPACITY_AMP_HR,INTERNAL_RESISTANCE)
-battery_cell.create_cathode(1.736e-14,1.637e-7,1.035e4)
-battery_cell.create_anode(8.275e-14,3.600e-6,2.948e4)
+battery_cell = BatteryCell(CAPACITY_AMP_HR, INTERNAL_RESISTANCE)
+# 
+battery_cell.create_cathode(1.736e-14, 1.637e-7, 1.035e4)
+battery_cell.create_anode(8.275e-14, 3.600e-6, 2.948e4)
 
 #Reference potentials for the electrodes
 cathode_potential_ref_array = [5.502, 4.353, 3.683, 3.554, 3.493, 3.4, 
@@ -65,8 +72,6 @@ cathode_potential_ref_array = [5.502, 4.353, 3.683, 3.554, 3.493, 3.4,
                                       3.238, 3.225, 3.207, 2.937, 2.855, 2.852,
                                       1.026, -1.12,-1.742]
 
-battery_cell.cathode.create_potential_lookup_tables(cathode_potential_ref_array)
-
 anode_potential_ref_array = [3.959, 3.4, 1.874, 9.233e-1, 9.074e-1, 
                                     6.693e-1,2.481e-3,1.050e-3,1.025e-3, 8.051e-4,
                                     5.813e-4, 2.567e-4, 2.196e-4, 1.104e-4,
@@ -75,35 +80,30 @@ anode_potential_ref_array = [3.959, 3.4, 1.874, 9.233e-1, 9.074e-1,
                                     2.165e-12,1.609e-12, 1.594e-12, 1.109e-12,
                                     4.499e-13, 2.25e-14, 1.335e-14, 1.019e-14,
                                     2.548e-16, 1.654e-16]
+
+# Create potential look up tables for cathode and anode
+battery_cell.cathode.create_potential_lookup_tables(cathode_potential_ref_array)
 battery_cell.anode.create_potential_lookup_tables(anode_potential_ref_array)
         
-
-#shorthand
+# shorthand
 cathode = battery_cell.cathode
 anode = battery_cell.anode
 
-dr_cath = R_CATHODE / N_SEGMENTS
-r_cath = np.empty(len(time_history))
+#r_cath = np.empty(len(time_history))
 
 # Initialize the cathode
 cathode_initial_c = cathode.concentration_list[28]
 cathode.mesh_initialize(R_CATHODE, N_SEGMENTS, n_timestep, cathode_initial_c)
-# initialize the anode
-anode_initial_c=anode.concentration_list[6]
+
+# Initialize the anode
+anode_initial_c = anode.concentration_list[6]
 anode.mesh_initialize(R_ANODE, N_SEGMENTS, n_timestep, anode_initial_c)
 second_derivative(cathode.Mesh, 1.0, 1)
 
 A_cathode = cathode.calculate_effective_area()
 
-#compute the derivatives
-
-
-
-#generate the time history:
-
 for i in range(1, n_timestep):
     cathode.simulation_step(i, DT)
     anode.simulation_step(i, DT)
     
-    
-voltage=battery_cell.get_voltage()
+voltage = battery_cell.get_voltage()
