@@ -27,7 +27,6 @@ class Mesh1D():
         Adds a node based on x location, returns new node
         '''
         self.node_container.append(Node(self, self.node_id, x))
-
         self.node_id += 1
         self.n_nodes += 1
 
@@ -47,7 +46,7 @@ class Mesh1D_SPM(Mesh1D):
     '''
     Mesh1D_SPM class, subset of Mesh1D
     '''
-    def add_node(self,x,initial_concentration):
+    def add_node(self, x, initial_concentration):
         '''
         Adds a node based on x location, returns new node
         '''
@@ -57,7 +56,7 @@ class Mesh1D_SPM(Mesh1D):
         self.n_nodes += 1
         return
     
-    def add_nodes(self,length,n_elements,initial_concentration):
+    def add_nodes(self, length, n_elements, initial_concentration):
         '''
         Add nodes of a length with n_elements
         '''

@@ -7,7 +7,7 @@ import scipy.interpolate
 import matplotlib.pyplot as plt
 from electrode import Electrode as Electrode
 
-INPUT_CURRENT=0.5 
+INPUT_CURRENT = 0.5 
 
 class BatteryCell():
     '''
@@ -21,6 +21,7 @@ class BatteryCell():
         self.capacity_amp_hour = capacity_amp_hour
         self.capacity_coulomb = self.capacity_amp_hour * 3600.0
         self.internal_resistance = internal_resistance
+
     def create_cathode(self, diffusivity, particle_radius, max_ion_concentration):
         '''
         Creates cathode containing the following parameters:
@@ -42,11 +43,11 @@ class BatteryCell():
         self.anode.input_current = INPUT_CURRENT
         
     def get_voltage(self):
-            '''
-            Returns voltage from input concentration
-            '''
-            potential_diff = self.cathode.potential_history - (
-                self.anode.potential_history)
-            internal_potential = self.anode.input_current * self.internal_resistance
-            voltage = potential_diff + internal_potential
-            return voltage
+        '''
+        Returns voltage from input concentration
+        '''
+        potential_diff = self.cathode.potential_history - (
+            self.anode.potential_history)
+        internal_potential = self.anode.input_current * self.internal_resistance
+        voltage = potential_diff + internal_potential
+        return voltage

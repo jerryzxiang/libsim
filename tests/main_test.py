@@ -4,6 +4,7 @@ import sys
 sys.path.append('..')
 
 #import libsim.main
+#from libsim import main
 import csv
 #from math import isclose
 
@@ -18,12 +19,11 @@ def test_cathode_output():
     cath_m = data[0]
     for i in range(33):
         #assert isclose(cath[i], float(cath_m[i]), abs_tol = 1e-4)
-        assert(cath[i] == float(cath_m[i+1]))
+        assert(cath[i] == float(cath_m[i + 1]))
 
 def test_anode_output():
     anode = main.anode.concentration_list
-    
     anode_m = data[1]
     for i in range(32):
         #assert isclose(anode[i], float(anode_m[i]), abs_tol = 1e-4)
-        assert(anode[i] == float(anode_m[i+1]))
+        assert(anode[i] == float(anode_m[i + 1]))

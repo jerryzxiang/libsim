@@ -88,16 +88,16 @@ class Electrode():
         $ N_{particles} = \frac{V}{V_{particle}} $
         $ A_{effective} = N_{particles} * 4 \pi R_{particle}^{2} $
         '''
-        particle_volume = (4.0 / 3.0) * math.pi * (self.particle_radius)**3
+        particle_volume = (4.0 / 3.0) * math.pi * (self.particle_radius) ** 3
         particle_number = self.volume / particle_volume
-        effective_area = particle_number * 4.0 * math.pi * (self.particle_radius**2)
+        effective_area = particle_number * 4.0 * math.pi * (self.particle_radius ** 2)
         return effective_area
         
     def mesh_initialize(self, length, n_elements, n_timestep, initial_concentration):
         '''
         
         '''
-        self.Mesh=Mesh1D_SPM(n_timestep)
+        self.Mesh = Mesh1D_SPM(n_timestep)
         self.Mesh.add_nodes(length, n_elements, initial_concentration)
 
     def electrode_potential(self, concentration_list, potential_ref,
@@ -107,7 +107,8 @@ class Electrode():
         '''
         potential = np.zeros(len(time_history))
         for i in range(len(time_history)):
-            potential[i] = scipy.interpolate.pchip_interpolate(concentration_list, potential_ref, concentrations_electrode[i])
+            potential[i] = scipy.interpolate.pchip_interpolate(
+                concentration_list, potential_ref, concentrations_electrode[i])
         return potential
 
     def get_voltage(self, cathode_potential, anode_potential, INPUT_CURRENT, internal_resistance):
@@ -140,15 +141,10 @@ class Electrode():
                 self.Mesh.node_container[i].concentration[0, timestep_id - 1]+
                 dt * (coef1 * arg1[i] + coef2 * arg2[i]))
         
-        self.Mesh.node_container[0].concentration[0, timestep_id]=(self.Mesh.
-                                                               node_container[1].
-                                                               concentration
-                                                               [0, timestep_id])
-        surface_c = (self.Mesh.dr * (self.input_current) / (self.effective_area * 
-                                                      self.diffusivity * 
-                                                      FARADAY_NUMBER)+
-            self.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])
+        self.Mesh.node_container[0].concentration[0, timestep_id] = (
+                        self.Mesh.node_container[1].concentration[0, timestep_id])
+        surface_c = (self.Mesh.dr * (self.input_current) / 
+                        (self.effective_area * self.diffusivity * FARADAY_NUMBER) +
+                        self.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])
         self.Mesh.node_container[n_nodes - 1].concentration[0, timestep_id] = surface_c
         self.potential_history[timestep_id]=self.potential_interpolator(surface_c)
-    
-                                      

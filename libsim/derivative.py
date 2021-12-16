@@ -26,10 +26,9 @@ def first_derivative(Mesh, coefficient, timestep):
 def second_derivative(Mesh, coefficient, timestep):
     '''
     Calculates the second derivative in Fick's Law
+    The coefficient to be passed is a function
+    Mesh is the mesh for which the derivative is to be evaluated.
     '''
-    #The coefficient to be passed is a function
-    #Mesh is the mesh for which the derivative is to be evaluated.
-    
     second_derivative=np.empty([Mesh.n_nodes,1])
     
     #utilize a "phantom node" to be able to compute the second derivative at 
@@ -42,5 +41,3 @@ def second_derivative(Mesh, coefficient, timestep):
         second_derivative[i, 0] = (i_plus_1 - 2 * i_center + i_minus_1) / (distance ** 2)
         second_derivative[i, 0] = coefficient*second_derivative[i, 0]    
     return second_derivative
-    
-
