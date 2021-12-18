@@ -31,9 +31,8 @@ def simulation_step(electrode, timestep_id, dt):
             electrode.Mesh.node_container[i].concentration[0, timestep_id - 1] +
             dt * (coef1 * arg1[i] + coef2 * arg2[i]))
 
-    # Set initial concentration to 2nd concentration value ?
-    electrode.Mesh.node_container[0].concentration[0, timestep_id] = (
-        electrode.Mesh.node_container[1].concentration[0, timestep_id])
+    # Apply the Neumann condition at the center of particel (zero derivative)
+    apply_neumann_bc(electrode.Mesh, timestep_id)
     # Calculate surface concentration
     surface_c = (electrode.Mesh.dr * (electrode.input_current) /
                  (electrode.effective_area * electrode.diffusivity * FARADAY_NUMBER) +
@@ -44,3 +43,9 @@ def simulation_step(electrode, timestep_id, dt):
     # Fill out potential_history array at each timestep with interpolated value
     # self.potential_history[timestep_id] = self.potential_interpolator(self.concentration_list, self.reference_potential)
     electrode.potential_history[timestep_id]=electrode.potential_interpolator(surface_c)
+
+
+def apply_neumann_bc(mesh,timestep_id):
+    mesh.node_container[0].concentration[0, timestep_id] = (
+        mesh.node_container[1].concentration[0, timestep_id])
+    return 0
