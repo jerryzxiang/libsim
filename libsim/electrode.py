@@ -133,4 +133,3 @@ class Electrode():
         Advances the simulation one step 
         '''
         libsim.solver.simulation_step(self,timestep_id,dt)
-        a
