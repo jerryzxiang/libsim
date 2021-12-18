@@ -34,12 +34,10 @@ def simulation_step(electrode, timestep_id, dt):
     # Apply the Neumann condition at the center of particel (zero derivative)
     apply_neumann_bc(electrode.Mesh, timestep_id)
     # Calculate surface concentration
-    surface_c = (electrode.Mesh.dr * (electrode.input_current) /
-                 (electrode.effective_area * electrode.diffusivity * FARADAY_NUMBER) +
-                 electrode.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])
-    # Set concentration at final node container to be surface concentration
-    electrode.Mesh.node_container[n_nodes-1].concentration[0, timestep_id] = (surface_c +
-                         electrode.Mesh.node_container[n_nodes- 2].concentration[0, timestep_id])
+    surface_c =calculate_surface_concentration(electrode, timestep_id, n_nodes)
+    # Apply the dirichlet BC, set the final node concentration to the surface 
+    #concentration
+    apply_dirichlet_bc(electrode.Mesh, timestep_id, n_nodes, surface_c)
     # Fill out potential_history array at each timestep with interpolated value
     # self.potential_history[timestep_id] = self.potential_interpolator(self.concentration_list, self.reference_potential)
     electrode.potential_history[timestep_id]=electrode.potential_interpolator(surface_c)
@@ -49,3 +47,16 @@ def apply_neumann_bc(mesh,timestep_id):
     mesh.node_container[0].concentration[0, timestep_id] = (
         mesh.node_container[1].concentration[0, timestep_id])
     return 0
+
+
+
+def apply_dirichlet_bc(mesh,timestep_id,n_nodes,surface_c):
+    # Set concentration at final node container to be surface concentration
+    mesh.node_container[n_nodes-1].concentration[0, timestep_id] = (surface_c +
+                         mesh.node_container[n_nodes- 2].concentration[0, timestep_id])
+    
+def calculate_surface_concentration(electrode,timestep_id,n_nodes):
+    surface_c = (electrode.Mesh.dr * (electrode.input_current) /
+                 (electrode.effective_area * electrode.diffusivity * FARADAY_NUMBER) +
+                 electrode.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])
+    return surface_c
