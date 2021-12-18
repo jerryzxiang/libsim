@@ -13,7 +13,7 @@ FARADAY_NUMBER = 9.64853399e4
 
 def simulation_step(electrode, timestep_id, dt):
     '''
-    Advances the simulation one step 
+    Advances the simulation one step
     '''
     arg1 = first_derivative(electrode.Mesh, 1.0, timestep_id)
     arg2 = second_derivative(electrode.Mesh, 1.0, timestep_id)
@@ -28,18 +28,19 @@ def simulation_step(electrode, timestep_id, dt):
         # Update concentration of current node container with
         # previous concentration plus dt * value
         electrode.Mesh.node_container[i].concentration[0, timestep_id] = (
-            electrode.Mesh.node_container[i].concentration[0, timestep_id - 1]+
+            electrode.Mesh.node_container[i].concentration[0, timestep_id - 1] +
             dt * (coef1 * arg1[i] + coef2 * arg2[i]))
-    
+
     # Set initial concentration to 2nd concentration value ?
     electrode.Mesh.node_container[0].concentration[0, timestep_id] = (
-                    electrode.Mesh.node_container[1].concentration[0, timestep_id])
+        electrode.Mesh.node_container[1].concentration[0, timestep_id])
     # Calculate surface concentration
-    surface_c = (electrode.Mesh.dr * (electrode.input_current) / 
-                    (electrode.effective_area * electrode.diffusivity * FARADAY_NUMBER) +
-                    electrode.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])
+    surface_c = (electrode.Mesh.dr * (electrode.input_current) /
+                 (electrode.effective_area * electrode.diffusivity * FARADAY_NUMBER) +
+                 electrode.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])
     # Set concentration at final node container to be surface concentration
-    electrode.Mesh.node_container[n_nodes - 1].concentration[0, timestep_id] = surface_c
-    # Fill out potential_history array at each timestep with interpolated value 
-    #self.potential_history[timestep_id] = self.potential_interpolator(self.concentration_list, self.reference_potential)
-    electrode.potential_history[timestep_id] = electrode.potential_interpolator(surface_c)
+    electrode.Mesh.node_container[n_nodes-1].concentration[0, timestep_id] = (surface_c +
+                         electrode.Mesh.node_container[n_nodes- 2].concentration[0, timestep_id])
+    # Fill out potential_history array at each timestep with interpolated value
+    # self.potential_history[timestep_id] = self.potential_interpolator(self.concentration_list, self.reference_potential)
+    electrode.potential_history[timestep_id]=electrode.potential_interpolator(surface_c)
