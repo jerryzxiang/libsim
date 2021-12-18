@@ -4,6 +4,8 @@ Electrode
 import numpy as np
 import math
 import scipy.interpolate
+
+import libsim.solver
 from libsim.mesh import Mesh1D_SPM as Mesh1D_SPM
 
 from libsim.derivative import second_derivative
@@ -128,33 +130,7 @@ class Electrode():
     
     def simulation_step(self, timestep_id, dt):
         '''
-        Simulates 
+        Advances the simulation one step 
         '''
-        arg1 = first_derivative(self.Mesh, 1.0, timestep_id)
-        arg2 = second_derivative(self.Mesh, 1.0, timestep_id)
-        n_nodes = len(arg1)
-        for i in range(1, self.Mesh.n_nodes - 1):
-            node = self.Mesh.node_container[i]
-            r = node.x
-
-            r_squared = r ** 2
-            coef1 = r_squared
-            coef2 = r * self.diffusivity / r_squared
-            # Update concentration of current node container with
-            # previous concentration plus dt * value
-            self.Mesh.node_container[i].concentration[0, timestep_id] = (
-                self.Mesh.node_container[i].concentration[0, timestep_id - 1]+
-                dt * (coef1 * arg1[i] + coef2 * arg2[i]))
-        
-        # Set initial concentration to 2nd concentration value ?
-        self.Mesh.node_container[0].concentration[0, timestep_id] = (
-                        self.Mesh.node_container[1].concentration[0, timestep_id])
-        # Calculate surface concentration
-        surface_c = (self.Mesh.dr * (self.input_current) / 
-                        (self.effective_area * self.diffusivity * FARADAY_NUMBER) +
-                        self.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])
-        # Set concentration at final node container to be surface concentration
-        self.Mesh.node_container[n_nodes - 1].concentration[0, timestep_id] = surface_c
-        # Fill out potential_history array at each timestep with interpolated value 
-        #self.potential_history[timestep_id] = self.potential_interpolator(self.concentration_list, self.reference_potential)
-        self.potential_history[timestep_id] = self.potential_interpolator(surface_c)
+        libsim.solver.simulation_step(self,timestep_id,dt)
+        a
