@@ -41,19 +41,19 @@ def euler_step(electrode,timestep_id,dt):
         r = node.x
 
         r_squared = r ** 2
-        coef1 = r_squared
-        coef2 = r * electrode.diffusivity / r_squared
+        coef1 = r*electrode.diffusivity/r_squared
+        coef2 = r_squared
         # Update concentration of current node container with
         # previous concentration plus dt * value
-        electrode.Mesh.node_container[i].concentration[0, timestep_id] = (
-            electrode.Mesh.node_container[i].concentration[0, timestep_id - 1] +
+        electrode.Mesh.node_container[i].concentration[0, timestep_id+1] = (
+            electrode.Mesh.node_container[i].concentration[0, timestep_id] +
             dt * (coef1 * arg1[i] + coef2 * arg2[i]))
         
         
         
 def apply_neumann_bc(mesh,timestep_id):
-    mesh.node_container[0].concentration[0, timestep_id] = (
-        mesh.node_container[1].concentration[0, timestep_id])
+    mesh.node_container[0].concentration[0, timestep_id+1] = (
+        mesh.node_container[1].concentration[0, timestep_id+1])
     return 0
 
 
@@ -61,12 +61,12 @@ def apply_neumann_bc(mesh,timestep_id):
 def apply_dirichlet_bc(mesh,timestep_id,surface_c):
     n_nodes=mesh.n_nodes
     # Set concentration at final node container to be surface concentration
-    mesh.node_container[n_nodes-1].concentration[0, timestep_id] = (surface_c +
-                         mesh.node_container[n_nodes- 2].concentration[0, timestep_id])
+    mesh.node_container[n_nodes-1].concentration[0, timestep_id+1] = surface_c 
     
 def calculate_surface_concentration(electrode,timestep_id):
     n_nodes=electrode.Mesh.n_nodes
-    surface_c = ((electrode.Mesh.dr * (electrode.input_current) /
-                 electrode.effective_area * electrode.diffusivity * FARADAY_NUMBER) +
-                 electrode.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])
-    return surface_c
+    surface_term=(electrode.Mesh.dr * (electrode.input_current) /(
+                 electrode.effective_area * electrode.diffusivity * FARADAY_NUMBER))
+    retval =  (surface_term +
+              electrode.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])
+    return retval

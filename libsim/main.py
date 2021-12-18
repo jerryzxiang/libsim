@@ -10,6 +10,10 @@ from libsim.mesh import Mesh1D_SPM as Mesh1D_SPM
 from libsim.derivative import second_derivative
 from libsim.derivative import first_derivative
 
+
+
+np.seterr(all='raise')
+
 # constant
 FARADAY_NUMBER = 9.64853399e4
 
@@ -101,14 +105,15 @@ anode.mesh_initialize(R_ANODE, N_SEGMENTS, n_timestep, anode_initial_c)
 second_derivative(cathode.Mesh, 1.0, 1)
 
 A_cathode = cathode.calculate_effective_area()
-
-for i in range(1, n_timestep):
+endtime=n_timestep
+for i in range(0, endtime-1):
     cathode.simulation_step(i, DT)
-    anode.simulation_step(i, DT)
+
+
     
-voltage = battery_cell.get_voltage()
+#voltage = battery_cell.get_voltage()
 
 # plotting voltage vs time
 plt.figure()
-plt.plot(time_history, voltage)
+plt.plot(cathode.Mesh.node_container[10].concentration[0,:])
 plt.show()

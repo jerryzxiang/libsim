@@ -28,6 +28,6 @@ class Node_SPM(Node):
         mesh, node_id, x, initial_concentration
         '''
         #The timehistory
-        self.concentration = np.empty((1, mesh.n_timestep))
+        self.concentration = np.zeros((1, mesh.n_timestep))
         self.concentration[0, 0] = initial_concentration
         super().__init__(mesh, node_id, x)
