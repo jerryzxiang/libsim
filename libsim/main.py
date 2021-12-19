@@ -53,8 +53,8 @@ def main():
     plot.plot_voltage(ag.minutes, voltage)
 
     # Plot concentrations for both electrodes
-    plot.plot_concentration(cathode, 'Cathode')
-    plot.plot_concentration(anode, 'Anode')
+    plot.plot_concentration(ag.minutes, cathode, 'Cathode')
+    plot.plot_concentration(ag.minutes, anode, 'Anode')
 
 # Run 
 main()

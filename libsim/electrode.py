@@ -57,19 +57,7 @@ class Electrode():
         
         '''
         self.Mesh = Mesh1D_SPM(n_timestep)
-        self.Mesh.add_nodes(length, n_elements, initial_concentration)
-
-    #def electrode_potential(self, concentration_list, potential_ref,
-     #                       concentrations_electrode):
-      #  '''
-       # Interpolates concentration values between reference potentials
-       # '''
-       # potential = np.zeros(len(ag.time_history))
-       # for i in range(len(ag.time_history)):
-       #     potential[i] = scipy.interpolate.pchip_interpolate(
-       #         concentration_list, potential_ref, concentrations_electrode[i])
-        ##return potential
-        
+        self.Mesh.add_nodes(length, n_elements, initial_concentration)        
 
     def get_voltage(self, cathode_potential, anode_potential, INPUT_CURRENT, internal_resistance):
         '''
@@ -90,4 +78,4 @@ class Electrode():
         '''
         Advances the simulation one step 
         '''
-        solver.simulation_step(self,timestep_id,dt)
+        solver.simulation_step(self, timestep_id, dt)

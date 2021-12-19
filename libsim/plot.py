@@ -13,7 +13,7 @@ import parameters.referencePotentials as rp
 def plot_voltage(time, voltage):
   plt.figure()
   plt.title('Voltage')
-  plt.xlabel('Time [s]')
+  plt.xlabel('Time [min]')
   plt.ylabel('Potential [V]')
   plt.plot(time, voltage)
   plt.show()
@@ -21,7 +21,7 @@ def plot_voltage(time, voltage):
 def plot_concentration(time, electrode, electrode_type):
   plt.figure()
   plt.title(electrode_type +' ion concentration')
-  plt.xlabel('Time [s]')
+  plt.xlabel('Time [min]')
   plt.ylabel('Ion concentration [mol /m$^{3}$]')
   plt.plot(time, electrode.Mesh.node_container[10].concentration[0,:])
   plt.show()

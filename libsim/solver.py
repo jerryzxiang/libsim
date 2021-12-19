@@ -10,7 +10,7 @@ def simulation_step(electrode, timestep_id, dt):
     Advances the simulation one step
     '''
     #Take the euler step for the interior nodes
-    euler_step(electrode,timestep_id,dt)
+    euler_step(electrode, timestep_id, dt)
     # Apply the Neumann condition at the center of particel (zero derivative)
     apply_neumann_bc(electrode.Mesh, timestep_id)
     # Calculate surface concentration
@@ -22,9 +22,9 @@ def simulation_step(electrode, timestep_id, dt):
     # self.potential_history[timestep_id] = self.potential_interpolator(self.concentration_list, self.reference_potential)
     electrode.potential_history[timestep_id] = electrode.potential_interpolator(surface_c)
 
-def euler_step(electrode,timestep_id,dt):
+def euler_step(electrode, timestep_id, dt):
     '''
-    
+    Euler stepper
     '''
     arg1 = first_derivative(electrode.Mesh, 1.0, timestep_id)
     arg2 = second_derivative(electrode.Mesh, 1.0, timestep_id)
@@ -34,35 +34,36 @@ def euler_step(electrode,timestep_id,dt):
         r = node.x
 
         r_squared = r ** 2
-        coef1 = r*electrode.diffusivity/r_squared
+        coef1 = r * electrode.diffusivity / r_squared
         coef2 = r_squared
         # Update concentration of current node container with
         # previous concentration plus dt * value
-        electrode.Mesh.node_container[i].concentration[0, timestep_id+1] = (
+        electrode.Mesh.node_container[i].concentration[0, timestep_id + 1] = (
             electrode.Mesh.node_container[i].concentration[0, timestep_id] +
             dt * (coef1 * arg1[i] + coef2 * arg2[i]))
         
-        
-        
-def apply_neumann_bc(mesh,timestep_id):
-    mesh.node_container[0].concentration[0, timestep_id+1] = (
-        mesh.node_container[1].concentration[0, timestep_id+1])
+def apply_neumann_bc(mesh, timestep_id):
+    '''
+    Applies Neumann boundary conditions
+    '''
+    mesh.node_container[0].concentration[0, timestep_id + 1] = (
+        mesh.node_container[1].concentration[0, timestep_id + 1])
     return 0
 
-def apply_dirichlet_bc(mesh,timestep_id,surface_c):
+def apply_dirichlet_bc(mesh, timestep_id, surface_c):
     '''
-    
+    Applies Dirichlet boundary conditions
     '''
-    n_nodes=mesh.n_nodes
+    n_nodes = mesh.n_nodes
     # Set concentration at final node container to be surface concentration
-    mesh.node_container[n_nodes-1].concentration[0, timestep_id+1] = surface_c 
+    mesh.node_container[n_nodes - 1].concentration[0, timestep_id + 1] = surface_c 
     
-def calculate_surface_concentration(electrode,timestep_id):
+def calculate_surface_concentration(electrode, timestep_id):
     '''
-    
+    Calculates surface concentration
     '''
-    n_nodes=electrode.Mesh.n_nodes
-    surface_term=(electrode.Mesh.dr * (electrode.input_current) /(
+    n_nodes = electrode.Mesh.n_nodes
+    surface_term = (electrode.Mesh.dr * (electrode.input_current) / (
                  electrode.effective_area * electrode.diffusivity * ag.FARADAY_NUMBER))
     retval =  (surface_term +
               electrode.Mesh.node_container[n_nodes - 2].concentration[0, timestep_id])

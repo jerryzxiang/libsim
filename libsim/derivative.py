@@ -10,7 +10,7 @@ def first_derivative(Mesh, coefficient, timestep):
     #The coefficient to be passed is a function
     #Mesh is the mesh for which the derivative is to be evaluated.
     
-    first_derivative = np.zeros([Mesh.n_nodes,1])
+    first_derivative = np.zeros([Mesh.n_nodes, 1])
         
     #utilize a "phantom node" to be able to compute the second derivative at 
     #The edges
@@ -29,7 +29,7 @@ def second_derivative(Mesh, coefficient, timestep):
     The coefficient to be passed is a function
     Mesh is the mesh for which the derivative is to be evaluated.
     '''
-    second_derivative = np.zeros([Mesh.n_nodes,1])
+    second_derivative = np.zeros([Mesh.n_nodes, 1])
     
     #utilize a "phantom node" to be able to compute the second derivative at 
     #The edges
