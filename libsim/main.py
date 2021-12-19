@@ -50,7 +50,7 @@ def main():
     voltage = battery_cell.get_voltage()
 
     # Plot voltage
-    plot.plot_voltage(ag.time_history, voltage)
+    plot.plot_voltage(ag.minutes, voltage)
 
     # Plot concentrations for both electrodes
     plot.plot_concentration(cathode, 'Cathode')

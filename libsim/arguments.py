@@ -86,5 +86,8 @@ dR_ANODE = R_CATHODE / N_SEGMENTS
 # number of time steps rounded down to nearest integer
 n_timestep = math.ceil(SIMULATION_TIME / DT)
 
+# time increment in minutes
+minutes = np.arange(0, SIMULATION_TIME/60, 1)
+
 # time history
 time_history = np.arange(0, SIMULATION_TIME, DT)
