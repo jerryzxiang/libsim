@@ -10,6 +10,6 @@ import parameters.referencePotentials as rp
 
 # plotting voltage vs time
 def plot_voltage(cathode):
-plt.figure()
-plt.plot(cathode.Mesh.node_container[10].concentration[0,:])
-plt.show()
+  plt.figure()
+  plt.plot(cathode.Mesh.node_container[10].concentration[0,:])
+  plt.show()
