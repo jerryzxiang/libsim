@@ -5,7 +5,7 @@ import numpy as np
 import math
 import scipy.interpolate
 import matplotlib.pyplot as plt
-from libsim.electrode import Electrode as Electrode
+from electrode import Electrode as Electrode
 
 INPUT_CURRENT = 0.5 
 

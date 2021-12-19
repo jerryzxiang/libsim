@@ -1,12 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec 17 16:22:27 2021
-
-@author: antti
-"""
-from libsim.derivative import first_derivative as first_derivative
-from libsim.derivative import second_derivative as second_derivative
+'''
+Solver - simulation stepper
+'''
+from derivative import first_derivative as first_derivative
+from derivative import second_derivative as second_derivative
 
 FARADAY_NUMBER = 9.64853399e4
 

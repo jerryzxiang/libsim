@@ -5,11 +5,11 @@ import numpy as np
 import math
 import scipy.interpolate
 
-import libsim.solver
-from libsim.mesh import Mesh1D_SPM as Mesh1D_SPM
+import solver
+from mesh import Mesh1D_SPM as Mesh1D_SPM
 
-from libsim.derivative import second_derivative
-from libsim.derivative import first_derivative
+from derivative import second_derivative
+from derivative import first_derivative
 
 # constant
 FARADAY_NUMBER = 9.64853399e4
@@ -132,4 +132,4 @@ class Electrode():
         '''
         Advances the simulation one step 
         '''
-        libsim.solver.simulation_step(self,timestep_id,dt)
+        solver.simulation_step(self,timestep_id,dt)
