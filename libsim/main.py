@@ -5,7 +5,7 @@ import numpy as np
 import math
 import argparse
 import scipy.interpolate
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 from batterycell import BatteryCell as BatteryCell
 from mesh import Mesh1D_SPM as Mesh1D_SPM
@@ -13,6 +13,7 @@ from derivative import second_derivative
 from derivative import first_derivative
 import parameters.paramLibrary as pl
 import parameters.referencePotentials as rp
+import plot
 
 np.seterr(all='raise')
 
@@ -125,6 +126,7 @@ for i in range(0, endtime-1):
 #voltage = battery_cell.get_voltage()
 
 # plotting voltage vs time
-plt.figure()
-plt.plot(cathode.Mesh.node_container[10].concentration[0,:])
-plt.show()
+#plt.figure()
+#plt.plot(cathode.Mesh.node_container[10].concentration[0,:])
+#plt.show()
+plot.plot_voltage(cathode)
