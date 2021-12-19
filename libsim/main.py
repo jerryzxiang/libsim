@@ -6,13 +6,22 @@ import math
 import argparse
 import scipy.interpolate
 import matplotlib.pyplot as plt
+
 from batterycell import BatteryCell as BatteryCell
 from mesh import Mesh1D_SPM as Mesh1D_SPM
 from derivative import second_derivative
 from derivative import first_derivative
+from paramLibrary import immutableCathodeDict
+from paramLibrary import immutableAnodeDict
 
 np.seterr(all='raise')
 
+# constant
+FARADAY_NUMBER = 9.64853399e4
+
+'''
+Argument parsing.
+'''
 parser = argparse.ArgumentParser()
 parser.add_argument('cathode', type = str, 
                     help = 'The first command line arg \
@@ -29,29 +38,25 @@ parser.add_argument('capacity', type = float,
                     help = 
                     'The fourth command line arg \
                     is the capacity. Units: Amp Hours')
-parser.add_argument('internal resistance', type = float,
+parser.add_argument('internal_resistance', type = float,
                     help = 
                     'The fifth command line arg \
                     is the internal resistance. Units: Ohms')        
 args = parser.parse_args()
 
-
-# constant
-FARADAY_NUMBER = 9.64853399e4
-
 # input current to the model
-# input nominal capacity [Ah] to the model
-# dependent on cell type. This is for a 26650 cell
-# should be parsed as a command line arg
-INPUT_CURRENT = 0.5 
-CAPACITY_AMP_HR = 2.3
-INTERNAL_RESISTANCE = 0.150
+INPUT_CURRENT = args.input_current
+# input nominal capacity [Ah] to the model, dependent on cell type
+CAPACITY_AMP_HR = args.capacity
+# internal resistance
+INTERNAL_RESISTANCE = args.internal_resistance
 
 # number of radial segments
 N_SEGMENTS = 10
 
 # Solid diffusivity in anode
 D_ANODE = 8.275e-14
+#D_ANODE = immutableAnodeDict.getParams
 
 # particle radius in the anode [meters]
 R_ANODE = 3.6e-6
@@ -73,7 +78,7 @@ dR_ANODE = R_CATHODE / N_SEGMENTS
 dR_CATHODE = R_CATHODE / N_SEGMENTS
 
 # simulation time in [seconds]
-SIMULATION_TIME = 10 
+SIMULATION_TIME = 10
 
 # change in time [seconds]
 DT = 0.001
