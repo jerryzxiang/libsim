@@ -7,3 +7,8 @@ from batterycell import BatteryCell as BatteryCell
 from mesh import Mesh1D_SPM as Mesh1D_SPM
 import parameters.paramLibrary as pl
 import parameters.referencePotentials as rp
+
+# plotting voltage vs time
+plt.figure()
+plt.plot(BatteryCell.cathode.Mesh.node_container[10].concentration[0,:])
+plt.show()
