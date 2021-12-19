@@ -15,11 +15,24 @@ np.seterr(all='raise')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('cathode', type = str, 
-        help = 'The first command line arg is the cathode type: LFP, LCO, NMC')
+                    help = 'The first command line arg \
+                    is the cathode type: LFP, LCO, NMC')
 parser.add_argument('anode', type = str,
-        help = 'The second command line arg is the anode type: graphite')
+                    help = 
+                    'The second command line arg \
+                    is the anode type: graphite')
 parser.add_argument('input_current', type = float,
-        help = 'The third command line argument is the input current')
+                    help = 
+                    'The third command line arg \
+                    is the input current. Units: Amps')
+parser.add_argument('capacity', type = float,
+                    help = 
+                    'The fourth command line arg \
+                    is the capacity. Units: Amp Hours')
+parser.add_argument('internal resistance', type = float,
+                    help = 
+                    'The fifth command line arg \
+                    is the internal resistance. Units: Ohms')        
 args = parser.parse_args()
 
 
