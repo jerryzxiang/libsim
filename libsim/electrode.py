@@ -7,9 +7,6 @@ import scipy.interpolate
 
 import solver
 from mesh import Mesh1D_SPM as Mesh1D_SPM
-
-#from derivative import second_derivative
-#from derivative import first_derivative
 import arguments as ag
 
 class Electrode():
@@ -62,16 +59,17 @@ class Electrode():
         self.Mesh = Mesh1D_SPM(n_timestep)
         self.Mesh.add_nodes(length, n_elements, initial_concentration)
 
-    def electrode_potential(self, concentration_list, potential_ref,
-                            concentrations_electrode):
-        '''
-        Interpolates concentration values between reference potentials
-        '''
-        potential = np.zeros(len(ag.time_history))
-        for i in range(len(ag.time_history)):
-            potential[i] = scipy.interpolate.pchip_interpolate(
-                concentration_list, potential_ref, concentrations_electrode[i])
-        return potential
+    #def electrode_potential(self, concentration_list, potential_ref,
+     #                       concentrations_electrode):
+      #  '''
+       # Interpolates concentration values between reference potentials
+       # '''
+       # potential = np.zeros(len(ag.time_history))
+       # for i in range(len(ag.time_history)):
+       #     potential[i] = scipy.interpolate.pchip_interpolate(
+       #         concentration_list, potential_ref, concentrations_electrode[i])
+        ##return potential
+        
 
     def get_voltage(self, cathode_potential, anode_potential, INPUT_CURRENT, internal_resistance):
         '''
