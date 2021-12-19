@@ -9,6 +9,7 @@ import parameters.paramLibrary as pl
 import parameters.referencePotentials as rp
 
 # plotting voltage vs time
+def plot_voltage(cathode):
 plt.figure()
-plt.plot(BatteryCell.cathode.Mesh.node_container[10].concentration[0,:])
+plt.plot(cathode.Mesh.node_container[10].concentration[0,:])
 plt.show()
