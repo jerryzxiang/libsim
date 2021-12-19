@@ -6,8 +6,7 @@ import math
 import scipy.interpolate
 import matplotlib.pyplot as plt
 from electrode import Electrode as Electrode
-
-INPUT_CURRENT = 0.5 
+import arguments as ag
 
 class BatteryCell():
     '''
@@ -30,7 +29,7 @@ class BatteryCell():
         '''
         self.cathode=Electrode(diffusivity, particle_radius, max_ion_concentration,
                                self.capacity_coulomb)
-        self.cathode.input_current = -INPUT_CURRENT
+        self.cathode.input_current = -ag.INPUT_CURRENT
         
     def create_anode(self, diffusivity, particle_radius, max_ion_concentration):
         '''
@@ -40,7 +39,7 @@ class BatteryCell():
         '''
         self.anode=Electrode(diffusivity, particle_radius, max_ion_concentration,
                              self.capacity_coulomb)
-        self.anode.input_current = INPUT_CURRENT
+        self.anode.input_current = ag.INPUT_CURRENT
         
     def get_voltage(self):
         '''

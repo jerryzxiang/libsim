@@ -35,7 +35,7 @@ class Electrode():
         Creates a potential lookup table based on a reference list
         '''
         self.reference_potential = np.array(ref_list)
-        self.concentration_list = np.linspace(0, self.max_ion_concentration, 33)
+        self.concentration_list = np.linspace(0, self.max_ion_concentration, len(ref_list))
         self.potential_interpolator = scipy.interpolate.PchipInterpolator(
             self.concentration_list, self.reference_potential)
     
