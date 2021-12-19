@@ -123,10 +123,11 @@ for i in range(0, endtime-1):
 
 
     
-#voltage = battery_cell.get_voltage()
-
+voltage = battery_cell.get_voltage()
 # plotting voltage vs time
 #plt.figure()
 #plt.plot(cathode.Mesh.node_container[10].concentration[0,:])
 #plt.show()
-plot.plot_voltage(cathode)
+plot.plot_voltage(voltage)
+plot.plot_concentration(cathode)
+plot.show_plots()
