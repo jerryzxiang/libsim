@@ -3,6 +3,7 @@ Driver code file: currently using constants instead of immutable dict
 """
 import numpy as np
 import math
+import argparse
 import scipy.interpolate
 import matplotlib.pyplot as plt
 from batterycell import BatteryCell as BatteryCell
@@ -10,9 +11,17 @@ from mesh import Mesh1D_SPM as Mesh1D_SPM
 from derivative import second_derivative
 from derivative import first_derivative
 
-
-
 np.seterr(all='raise')
+
+parser = argparse.ArgumentParser()
+parser.add_argument('cathode', type = str, 
+        help = 'The first command line arg is the cathode type: LFP, LCO, NMC')
+parser.add_argument('anode', type = str,
+        help = 'The second command line arg is the anode type: graphite')
+parser.add_argument('input_current', type = float,
+        help = 'The third command line argument is the input current')
+args = parser.parse_args()
+
 
 # constant
 FARADAY_NUMBER = 9.64853399e4
@@ -40,6 +49,10 @@ D_CATHODE = 1.736e-14
 # particle radius in the cathode [meters]
 R_CATHODE = 1.637e-7
 
+MAX_ION_CONCENTRATION_CATHODE = 1.035e4
+
+MAX_ION_CONCENTRATION_ANODE = 2.948e4
+
 # anode segment length
 dR_ANODE = R_CATHODE / N_SEGMENTS
 
@@ -65,8 +78,8 @@ time_history = np.arange(0, SIMULATION_TIME, DT)
 # how this would be run in a driver code
 battery_cell = BatteryCell(CAPACITY_AMP_HR, INTERNAL_RESISTANCE)
 # 
-battery_cell.create_cathode(1.736e-14, 1.637e-7, 1.035e4)
-battery_cell.create_anode(8.275e-14, 3.600e-6, 2.948e4)
+battery_cell.create_cathode(D_CATHODE, R_CATHODE, MAX_ION_CONCENTRATION_CATHODE)
+battery_cell.create_anode(D_ANODE, R_ANODE, MAX_ION_CONCENTRATION_ANODE)
 
 #Reference potentials for the electrodes
 cathode_potential_ref_array = [5.502, 4.353, 3.683, 3.554, 3.493, 3.4, 
