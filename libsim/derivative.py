@@ -44,5 +44,5 @@ def second_derivative(Mesh, coefficient, timestep):
             print("error on timestep")
             print(timestep)
             raise
-        second_derivative[i, 0] = coefficient*second_derivative[i, 0]    
+        second_derivative[i, 0] = coefficient * second_derivative[i, 0]    
     return second_derivative

@@ -11,7 +11,7 @@ def simulation_step(electrode, timestep_id, dt):
     '''
     #Take the euler step for the interior nodes
     euler_step(electrode, timestep_id, dt)
-    # Apply the Neumann condition at the center of particel (zero derivative)
+    # Apply the Neumann condition at the center of particle (zero derivative)
     apply_neumann_bc(electrode.Mesh, timestep_id)
     # Calculate surface concentration
     surface_c = calculate_surface_concentration(electrode, timestep_id)
