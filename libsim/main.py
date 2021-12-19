@@ -1,5 +1,5 @@
 """
-Driver code file: currently using constants instead of immutable dict
+Driver code file: Takes in 5 command line arguments
 """
 import numpy as np
 import math
