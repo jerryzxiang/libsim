@@ -18,10 +18,10 @@ def plot_voltage(time, voltage):
   plt.plot(time, voltage)
   plt.show()
 
-def plot_concentration(electrode):
+def plot_concentration(electrode, electrode_type):
   plt.figure()
-  plt.title('Concentration:' + str(electrode))
+  plt.title(electrode_type +' ion concentration')
   plt.xlabel('Time [s]')
-  plt.ylabel('Concentration [mol /m$^{3}$]')
+  plt.ylabel('Ion concentration [mol /m$^{3}$]')
   plt.plot(electrode.Mesh.node_container[10].concentration[0,:])
   plt.show()
