@@ -11,13 +11,15 @@ from batterycell import BatteryCell as BatteryCell
 from mesh import Mesh1D_SPM as Mesh1D_SPM
 from derivative import second_derivative
 from derivative import first_derivative
-from paramLibrary import immutableCathodeDict
-from paramLibrary import immutableAnodeDict
+import paramLibrary as pl
 
 np.seterr(all='raise')
 
 # constant
 FARADAY_NUMBER = 9.64853399e4
+
+C_dict = pl.cathodeDict
+A_dict = pl.anodeDict
 
 '''
 Argument parsing.
@@ -25,11 +27,15 @@ Argument parsing.
 parser = argparse.ArgumentParser()
 parser.add_argument('cathode', type = str, 
                     help = 'The first command line arg \
-                    is the cathode type: LFP, LCO, NMC')
+                    is the cathode type:' 
+                    + str(list(C_dict.keys()))
+                    )
 parser.add_argument('anode', type = str,
                     help = 
                     'The second command line arg \
-                    is the anode type: graphite')
+                    is the anode type: graphite:'
+                    + str(list(A_dict.keys()))
+                    )
 parser.add_argument('input_current', type = float,
                     help = 
                     'The third command line arg \
@@ -44,6 +50,14 @@ parser.add_argument('internal_resistance', type = float,
                     is the internal resistance. Units: Ohms')        
 args = parser.parse_args()
 
+D_CATHODE = C_dict[args.cathode][0]
+R_CATHODE = C_dict[args.cathode][1]
+MAX_ION_CONCENTRATION_CATHODE = C_dict[args.cathode][2]
+
+D_ANODE = A_dict[args.anode][0]
+R_ANODE = A_dict[args.anode][1]
+MAX_ION_CONCENTRATION_ANODE = A_dict[args.anode][2]
+
 # input current to the model
 INPUT_CURRENT = args.input_current
 # input nominal capacity [Ah] to the model, dependent on cell type
@@ -53,23 +67,6 @@ INTERNAL_RESISTANCE = args.internal_resistance
 
 # number of radial segments
 N_SEGMENTS = 10
-
-# Solid diffusivity in anode
-D_ANODE = 8.275e-14
-#D_ANODE = immutableAnodeDict.getParams
-
-# particle radius in the anode [meters]
-R_ANODE = 3.6e-6
-
-# Solid diffusivity in cathode
-D_CATHODE = 1.736e-14
-
-# particle radius in the cathode [meters]
-R_CATHODE = 1.637e-7
-
-MAX_ION_CONCENTRATION_CATHODE = 1.035e4
-
-MAX_ION_CONCENTRATION_ANODE = 2.948e4
 
 # anode segment length
 dR_ANODE = R_CATHODE / N_SEGMENTS
