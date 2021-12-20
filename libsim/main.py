@@ -2,8 +2,6 @@
 Driver code file
 """
 import numpy as np
-import math
-import scipy.interpolate
 import matplotlib.pyplot as plt
 
 from batterycell import BatteryCell as BatteryCell
@@ -27,49 +25,52 @@ def main():
     battery_cell.create_anode(ag.D_ANODE, ag.R_ANODE, 
                             ag.MAX_ION_CONCENTRATION_ANODE)
 
-    # Create potential look up tables for cathode and anode
-    cathode_potential_ref = rp.cathode_potential_ref_array[ag.args.cathode]
-    anode_potential_ref = rp.anode_potential_ref_array[ag.args.anode]
-    battery_cell.cathode.create_potential_lookup_tables(cathode_potential_ref)
-    battery_cell.anode.create_potential_lookup_tables(anode_potential_ref)
-    
     # shorthand
     cathode = battery_cell.cathode
     anode = battery_cell.anode
 
+    # Create potential look up tables for cathode and anode
+    cathode_potential_ref = rp.cathode_potential_ref_array[ag.args.cathode]
+    anode_potential_ref = rp.anode_potential_ref_array[ag.args.anode]
+    cathode.create_potential_lookup_tables(cathode_potential_ref)
+    anode.create_potential_lookup_tables(anode_potential_ref)
+    
     # Initialize the cathode
     cathode_initial_c = cathode.concentration_list[28]
-    cathode.mesh_initialize(ag.R_CATHODE, ag.N_SEGMENTS, ag.n_timestep, cathode_initial_c)
+    cathode.mesh_initialize(ag.R_CATHODE, ag.N_SEGMENTS, 
+                            ag.n_timestep, cathode_initial_c)
 
     # Initialize the anode
     anode_initial_c = anode.concentration_list[6]
-    anode.mesh_initialize(ag.R_ANODE, ag.N_SEGMENTS, ag.n_timestep, anode_initial_c)
+    anode.mesh_initialize(ag.R_ANODE, ag.N_SEGMENTS, 
+                        ag.n_timestep, anode_initial_c)
 
-    endtime = ag.n_timestep
     # Run simulation
-    for i in range(0, endtime - 1):
+    for i in range(0, ag.n_timestep - 1):
         cathode.simulation_step(i, ag.DT)
         anode.simulation_step(i, ag.DT)
 
-
-    #voltage = battery_cell.get_voltage()
-    cathode_voltage = cathode.electrode_potential(cathode.Mesh.node_container[ag.N_SEGMENTS])
-    #plt.figure()
-    #plt.plot(ag.time_history, cathode_voltage)
-    #plt.show()
-    anode_voltage = anode.electrode_potential(anode.Mesh.node_container[ag.N_SEGMENTS])
-    print('cathode voltage', cathode_voltage)
-
-    voltage = battery_cell.get_voltage(cathode_voltage, anode_voltage, 
+    cathode_potential = cathode.electrode_potential(cathode.Mesh.node_container[ag.N_SEGMENTS])
+    anode_potential = anode.electrode_potential(anode.Mesh.node_container[ag.N_SEGMENTS])
+    voltage = battery_cell.get_voltage(cathode_potential, anode_potential, 
                                     ag.INPUT_CURRENT, ag.INTERNAL_RESISTANCE)
-
-    # Plot voltage
-    plot.plot_voltage(cathode.reference_potential)
-    plot.plot_voltage(voltage)
+    
+    # Plot electrode potential vs time
+    plot.plot_voltage(cathode.reference_potential,
+                        'Reference Potential vs Time - Cathode - ' 
+                        + str(ag.args.cathode))
+    plot.plot_voltage(anode.reference_potential,
+                    'Reference Potential vs Time - Anode - '
+                    + str(ag.args.anode))                    
+    # Plot battery voltage vs time  
+    plot.plot_voltage(voltage, 
+                        'Battery Voltage vs. Time (Charging) - ' 
+                        + str(ag.args.cathode) + '/' 
+                        + str(ag.args.anode))
 
     # Plot concentrations for both electrodes
-    plot.plot_concentration(ag.time_history, cathode, 'Cathode')
-    plot.plot_concentration(ag.time_history, anode, 'Anode')
+    plot.plot_concentration(cathode, cathode_potential_ref, 'Cathode')
+    plot.plot_concentration(anode, anode_potential_ref, 'Anode')
 
 # Run 
 main()
