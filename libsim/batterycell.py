@@ -2,8 +2,6 @@
 BatteryCell
 '''
 import numpy as np
-import math
-import scipy.interpolate
 import matplotlib.pyplot as plt
 from electrode import Electrode as Electrode
 import arguments as ag
