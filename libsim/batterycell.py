@@ -17,7 +17,7 @@ class BatteryCell():
         Initializes the BatteryCell class
         '''
         self.capacity_amp_hour = capacity_amp_hour
-        self.capacity_coulomb = self.capacity_amp_hour * 3600.0
+        self.capacity_coulomb = self.capacity_amp_hour * 3600.0 # time conversion
         self.internal_resistance = internal_resistance
 
     def create_cathode(self, diffusivity, particle_radius, 
@@ -27,8 +27,9 @@ class BatteryCell():
         diffusivity, particle_radius, max_ion_concentration
         from the Electrode class
         '''
-        self.cathode=Electrode(diffusivity, particle_radius, max_ion_concentration,
-                               self.capacity_coulomb)
+        self.cathode=Electrode(diffusivity, particle_radius, 
+                                max_ion_concentration,
+                                self.capacity_coulomb)
         self.cathode.input_current = -ag.INPUT_CURRENT
         
     def create_anode(self, diffusivity, particle_radius, 
