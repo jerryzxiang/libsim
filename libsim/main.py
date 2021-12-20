@@ -54,27 +54,22 @@ def main():
 
     #voltage = battery_cell.get_voltage()
     cathode_voltage = cathode.electrode_potential(cathode.Mesh.node_container[ag.N_SEGMENTS])
-    plt.figure()
-    plt.plot(ag.time_history, cathode_voltage)
-    plt.show()
+    #plt.figure()
+    #plt.plot(ag.time_history, cathode_voltage)
+    #plt.show()
     anode_voltage = anode.electrode_potential(anode.Mesh.node_container[ag.N_SEGMENTS])
-    #print('cathode voltage', cathode_voltage)
+    print('cathode voltage', cathode_voltage)
 
     voltage = battery_cell.get_voltage(cathode_voltage, anode_voltage, 
-                                    ag.INPUT_CURRENT, ag.INTERNAL_RESISTANCE
-                                )
-    #print('len voltage', len(voltage))
-    #voltage_array = np.zeros(len(ag.time_history))
-    #for i in range(0, len(ag.time_history)):
-    #    voltage_array[i] = battery_cell.get_voltage()
+                                    ag.INPUT_CURRENT, ag.INTERNAL_RESISTANCE)
 
     # Plot voltage
     plot.plot_voltage(cathode.reference_potential)
     plot.plot_voltage(voltage)
 
     # Plot concentrations for both electrodes
-    #plot.plot_concentration(ag.minutes, cathode, 'Cathode')
-    #plot.plot_concentration(ag.minutes, anode, 'Anode')
+    plot.plot_concentration(ag.time_history, cathode, 'Cathode')
+    plot.plot_concentration(ag.time_history, anode, 'Anode')
 
 # Run 
 main()
