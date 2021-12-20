@@ -5,9 +5,9 @@ Final project for APC524 Fall 2021, Princeton University. Single-particle modell
 By [Alex Caldwell](https://github.com/awcald), [Alex Preston](https://github.com/alexandercpreston), [Antti Valkonen](https://github.com/valkonena), [Jerry Xiang](https://github.com/jerryzxiang), [Jose Yanez](https://github.com/masterjose3000).
 
 ## Installation
-The third-party packages required are: `python3`, `numpy`, `scipy.interpolate`, `math`, and `matplotlib`. These packages can all be installed via `pip`.
+The third-party packages required are: `python3`, `numpy`, `scipy.interpolate`, `math`, and `matplotlib`. These packages can all be installed via `pip3`.
 
-The repo can be cloned from `https://github.com/jerryzxiang/libsim.git`
+The repo can be cloned from `https://github.com/jerryzxiang/libsim.git` or installed via `pip3 install git+ssh://git@github.com:jerryzxiang/libsim.git`
 
 ## Usage
 This program is run through the driver code file, `main.py`, which takes 8 command line arguments. As of now, there is no GUI. The inputs are the cathode, anode, input current, capacity of the cell in amp hours, the number of radial segments, the simulation time in seconds, and the time steps. An example is shown here for an LIB with an LFP cathode and graphite anode:
