@@ -8,21 +8,21 @@
 \contentsline {section}{\numberline {4.1}arguments module}{9}{section.4.1}%
 \contentsline {section}{\numberline {4.2}batterycell module}{9}{section.4.2}%
 \contentsline {section}{\numberline {4.3}derivative module}{9}{section.4.3}%
-\contentsline {section}{\numberline {4.4}electrode module}{9}{section.4.4}%
-\contentsline {section}{\numberline {4.5}main module}{9}{section.4.5}%
-\contentsline {section}{\numberline {4.6}mesh module}{9}{section.4.6}%
-\contentsline {section}{\numberline {4.7}node module}{10}{section.4.7}%
-\contentsline {section}{\numberline {4.8}plot module}{10}{section.4.8}%
-\contentsline {section}{\numberline {4.9}solver module}{10}{section.4.9}%
-\contentsline {chapter}{\numberline {5}Usage}{11}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Installation}{11}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Modeling Batteries}{11}{section.5.2}%
-\contentsline {chapter}{\numberline {6}Profiling}{13}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Lessons Learned}{15}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Future Work}{17}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Graphic User Interface (GUI)}{17}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Tests}{17}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Expanding Models Library}{17}{section.8.3}%
-\contentsline {chapter}{\numberline {9}Indices and tables}{19}{chapter.9}%
-\contentsline {chapter}{Python Module Index}{21}{section*.14}%
-\contentsline {chapter}{Index}{23}{section*.15}%
+\contentsline {section}{\numberline {4.4}electrode module}{10}{section.4.4}%
+\contentsline {section}{\numberline {4.5}main module}{10}{section.4.5}%
+\contentsline {section}{\numberline {4.6}mesh module}{10}{section.4.6}%
+\contentsline {section}{\numberline {4.7}node module}{11}{section.4.7}%
+\contentsline {section}{\numberline {4.8}plot module}{12}{section.4.8}%
+\contentsline {section}{\numberline {4.9}solver module}{12}{section.4.9}%
+\contentsline {chapter}{\numberline {5}Usage}{13}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Installation}{13}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Modeling Batteries}{13}{section.5.2}%
+\contentsline {chapter}{\numberline {6}Profiling}{15}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Lessons Learned}{17}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Future Work}{19}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Graphic User Interface (GUI)}{19}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Tests}{19}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Expanding Models Library}{19}{section.8.3}%
+\contentsline {chapter}{\numberline {9}Indices and tables}{21}{chapter.9}%
+\contentsline {chapter}{Python Module Index}{23}{section*.14}%
+\contentsline {chapter}{Index}{25}{section*.15}%

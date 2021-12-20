@@ -9,7 +9,12 @@ import arguments as ag
 class BatteryCell():
     '''
     BatteryCell model class
-    Contains functions to create cathode and anode
+    Contains
+
+    :param capacity_amp_hour: Amp Hour of the system.
+    :type capacity_amp_hour: [double]
+    :param internal_resistance: Internal resistance of the battery.
+    :type internal_resistance: [double]
 
     '''
     def __init__(self, capacity_amp_hour, internal_resistance):
@@ -23,9 +28,14 @@ class BatteryCell():
     def create_cathode(self, diffusivity, particle_radius, 
                         max_ion_concentration):
         '''
-        Creates cathode containing the following parameters:
-        diffusivity, particle_radius, max_ion_concentration
-        from the Electrode class
+        Creates cathode containing parameters from the Electrode Class.
+
+        :param diffusivity: Diffusivity desired for the battery model. [(m^2)/s]
+        :type diffusivity: [double]
+        :param particle_radius: Particle radius of the battery model particles. [m]
+        :type particle_radius: [double]
+        :param max_ion_concetration: Maximum desired ion concentration. [mol/(m^3)]
+        :type max_ion_concentration: [double]
         '''
         self.cathode=Electrode(diffusivity, particle_radius, 
                                 max_ion_concentration,
@@ -35,9 +45,14 @@ class BatteryCell():
     def create_anode(self, diffusivity, particle_radius, 
                     max_ion_concentration):
         '''
-        Creates anode containing the following parameters:
-        diffusivity, particle_radius, max_ion_concentration
-        from the Electrode class
+        Creates anode containing parameters from Electrode class.
+
+        :param diffusivity: Diffusivity desired for the battery model. [(m^2)/s]
+        :type diffusivity: [double]
+        :param particle_radius: Particle radius of the battery model particles. [m]
+        :type particle_radius: [double]
+        :param max_ion_concetration: Maximum desired ion concentration. [mol/(m^3)]
+        :type max_ion_concentration: [double]
         '''
         self.anode=Electrode(diffusivity, particle_radius, 
                             max_ion_concentration,

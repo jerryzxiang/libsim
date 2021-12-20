@@ -96,29 +96,30 @@ This project is under active development.
 \label{\detokenize{background:models}}
 \sphinxAtStartPar
 One of the research challenges in the development of lithium\sphinxhyphen{}ion batteries
-(LIBs) is to predict their behavior under different operating modes,
-useful for estimating state of charge and state of health of batteries
-in electric vehicles (EV’s). There exist empirical models, mostly equivalent
+(LIBs) is to predict their behavior under different operating modes, which
+is useful for estimating state of charge and state of health of batteries
+in electric vehicles (EVs). There exist empirical models, mostly equivalent
 circuit\sphinxhyphen{}based, widely used in the Battery Management Systems (BMS) of
-electronics and EV’s. These types of models use past experimental data of a
+electronics and EVs. These types of models use past experimental data of a
 battery to anticipate its future states. Most of the experimental data used
-to find charge/discharge characteristics rely on the current or cell
-potential. On one hand, these empirical models are relatively fast and
-simple computationally, but they have drawbacks. For example, the
-physics\sphinxhyphen{}based parameters are not able to be predetermined. The battery
-characteristics aren’t updated as the battery ages and a battery’s model
-is unique to itself \sphinxhyphen{} it does not apply to all batteries but only a specific
-type.
+to find charge/discharge characteristics rely on the current or cell potential.
+On one hand, these empirical models are relatively fast and simple computationally,
+but they have drawbacks. For example, the physics\sphinxhyphen{}based parameters are not
+able to be predetermined. The battery characteristics are not updated as the
+battery ages and a battery’s model is unique to itself \sphinxhyphen{} it does not apply to
+all batteries but only a specific type.
 
 \sphinxAtStartPar
-Other major types of models are Pseudo\sphinxhyphen{}two\sphinxhyphen{}Dimensional (P2D) and Single
-Particle Model (SPM). Both popular battery models are widely used today.
-The P2D model is commonly used in lithium\sphinxhyphen{}ion battery studies, and the
-predicted behavior of this model matches experimental data quite accurately.
-A significant drawback with this model is the difficulty to use in real\sphinxhyphen{}time
-due to its computationally expensive nature. The SPM model simplifies
-anode/cathode interactions and reduces the dimensionality down to one
-dimension, which greatly enhances its computational capabilities. However,
+Electrochemical models are, on the other hand, more sophisticated. These
+models are based on chemical/electrochemical kinetics and transport equations.
+They may be used to simulate the LIB’s characteristics and reactions. Popular
+electrochemical models are the Pseudo\sphinxhyphen{}two\sphinxhyphen{}Dimensional (P2D) Model and Single
+Particle Model (SPM). The P2D model is commonly used in lithium\sphinxhyphen{}ion battery
+studies, and the predicted behavior of this model matches experimental data q
+uite accurately. A significant drawback with this model is the difficulty to
+use in real\sphinxhyphen{}time due to its computationally expensive nature. The SPM model
+simplifies anode/cathode interactions and reduces the dimensionality down to
+one dimension, which greatly enhances its computational capabilities. However,
 it places greater importance on the parameters of the anodes and cathodes.
 
 
@@ -132,6 +133,15 @@ for the model to be implemented in real\sphinxhyphen{}time EV LIBs modeling. It 
 for the impact of complex parameters such as ion diffusivity, ion particle
 radius, and maximum ion concentration at the ion’s surface on the
 performance of the battery.
+
+\sphinxAtStartPar
+Modelling these parameters is useful to compare to experimental results.
+
+\sphinxAtStartPar
+Eventually, this project can be expanded to estimate and predict the state
+of charge (SOC) and state of health (SOH) of LIBs, in order to reduce the
+computational cost and allow for the model to be implemented in real\sphinxhyphen{}time
+EV LIBs modeling.
 
 
 \chapter{Design Process}
@@ -149,16 +159,38 @@ decide to test through various types of lithium\sphinxhyphen{}ion batteries of
 their choosing.
 
 \sphinxAtStartPar
-SPM model was used to simulate battery cycling behaviors. For
-generating solutions a finite element method was chosen.
-Architectural choices were made to allow for future
-implementation of various different model types.
+Finding a way to solve the first and second order derivatives of the
+SPM model was also not as simple as just plugging values into an
+equation. To remedy this, we decided to use a finite element method
+that involves using a mesh that is composed of nodes, which was
+necessary to analytically solve these governing equations.
+
+\sphinxAtStartPar
+The SPM model was used to simulate battery cycling behaviors. For
+generating solutions a finite element method was chosen. Architectural
+choices were made to allow for future implementation of various different
+model types, though we had only implemented the finite element method.
+
+\sphinxAtStartPar
+Our initial design was less modularized than the final version, as many of
+the tests we created to verify integration results relied on hard coded
+constants and input parameters that could not be generalized at the conception.
+Once testing was complete for one case of hard coded constants, we were able to
+allow command line arguments to be passed into the program that allowed for
+flexibility of the simulation. For another example, the electrode.py class was
+very overloaded with a multitude of functions nested inside of it, but upon
+further inspection these functions could easily exist in a separate file that
+doesn’t need to be coupled with only the electrode class.
 
 
 \section{UML DIAGRAM}
 \label{\detokenize{design_process:uml-diagram}}
-\sphinxAtStartPar
-INCLUDE NEW UML DIAGRAM
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[scale=0.5]{{UML_final}.png}
+\caption{UML Diagram for libsim.}\label{\detokenize{design_process:id1}}\end{figure}
 
 
 \chapter{libsim}
@@ -179,7 +211,32 @@ Derivative
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{derivative:derivative.first_derivative}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{derivative.}}\sphinxbfcode{\sphinxupquote{first\_derivative}}}{\emph{\DUrole{n}{Mesh}}, \emph{\DUrole{n}{coefficient}}, \emph{\DUrole{n}{timestep}}}{}
 \sphinxAtStartPar
-Calculates the first derivative in Fick’s Law
+Calculates the first derivative in Fick’s Law using a “phantom node”.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{Mesh}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{Mesh}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Mesh for which the derivative is to be evaluated.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{coefficient}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Scalar coefficient for the derivative.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{timestep}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Index for the timestep of the current derivative.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+The first derivative of Fick’s Law for each of the nodes in the Mesh.
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+{[}double{]}
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -188,9 +245,43 @@ Calculates the first derivative in Fick’s Law
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{derivative:derivative.second_derivative}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{derivative.}}\sphinxbfcode{\sphinxupquote{second\_derivative}}}{\emph{\DUrole{n}{Mesh}}, \emph{\DUrole{n}{coefficient}}, \emph{\DUrole{n}{timestep}}}{}
 \sphinxAtStartPar
-Calculates the second derivative in Fick’s Law
-The coefficient to be passed is a function
-Mesh is the mesh for which the derivative is to be evaluated.
+Calculates the second derivative in Fick’s Law using a “phantom node”.
+\begin{quote}
+\begin{quote}\begin{description}
+\item[{param Mesh}] \leavevmode
+\sphinxAtStartPar
+Mesh for which the derivative is to be evaluated.
+
+\item[{type Mesh}] \leavevmode
+\sphinxAtStartPar
+{[}Mesh{]}
+
+\item[{param coefficient}] \leavevmode
+\sphinxAtStartPar
+Scalar coefficient for the derivative.
+
+\item[{type coefficient}] \leavevmode
+\sphinxAtStartPar
+{[}double{]}
+
+\item[{param timestep}] \leavevmode
+\sphinxAtStartPar
+Index for the timestep of the current derivative.
+
+\item[{type timestep}] \leavevmode
+\sphinxAtStartPar
+{[}int{]}
+
+\item[{return}] \leavevmode
+\sphinxAtStartPar
+The second derivative of Fick’s Law for each of the nodes in the Mesh.
+
+\item[{rtype}] \leavevmode
+\sphinxAtStartPar
+{[}double{]}
+
+\end{description}\end{quote}
+\end{quote}
 
 \end{fulllineitems}
 
@@ -206,6 +297,10 @@ Mesh is the mesh for which the derivative is to be evaluated.
 \label{\detokenize{mesh:module-mesh}}\label{\detokenize{mesh:mesh-module}}\label{\detokenize{mesh::doc}}\index{module@\spxentry{module}!mesh@\spxentry{mesh}}\index{mesh@\spxentry{mesh}!module@\spxentry{module}}
 \sphinxAtStartPar
 Mesh
+
+\sphinxAtStartPar
+Parent class for classes that describe the computational mesh for each
+different type of model/problem.
 \index{Mesh1D (class in mesh)@\spxentry{Mesh1D}\spxextra{class in mesh}}
 
 \begin{fulllineitems}
@@ -214,13 +309,38 @@ Mesh
 Bases: \sphinxcode{\sphinxupquote{object}}
 
 \sphinxAtStartPar
-Mesh1D class
+Mesh 1D is a 1\sphinxhyphen{}dimensional mesh composed of Nodes complete with
+functions to create Nodes. It includes an indexing system in order
+to be able to access individual nodes as needed (post\sphinxhyphen{}processing).
+
+\sphinxAtStartPar
+In order to initialize a Mesh1D, a variable n\_timestep is needed.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{n\_timestep}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Number of timesteps to be taken.
+
+\end{description}\end{quote}
 \index{add\_node() (mesh.Mesh1D method)@\spxentry{add\_node()}\spxextra{mesh.Mesh1D method}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{mesh:mesh.Mesh1D.add_node}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{add\_node}}}{\emph{\DUrole{n}{x}}}{}
 \sphinxAtStartPar
-Adds a node based on x location, returns new node
+Adds a node based on x location, and returns a new node.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Index identifier for location of the node.
+
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+x
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+{[}int{]}
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -229,7 +349,20 @@ Adds a node based on x location, returns new node
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{mesh:mesh.Mesh1D.add_nodes}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{add\_nodes}}}{\emph{\DUrole{n}{length}}, \emph{\DUrole{n}{n\_elements}}}{}
 \sphinxAtStartPar
-Add nodes of a length with n\_elements
+Add nodes of a specified length with n\_elements.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{length}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Length of nodes to add.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{n\_elements}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Number of nodes to add.
+
+\end{itemize}
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -244,13 +377,27 @@ Add nodes of a length with n\_elements
 Bases: {\hyperref[\detokenize{mesh:mesh.Mesh1D}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{mesh.Mesh1D}}}}}
 
 \sphinxAtStartPar
-Mesh1D\_SPM class, subset of Mesh1D
+Mesh1D\_SPM class inherits Mesh1D. Here the one dimensional Mesh
+is implemented for the use with SPM model.
 \index{add\_node() (mesh.Mesh1D\_SPM method)@\spxentry{add\_node()}\spxextra{mesh.Mesh1D\_SPM method}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{mesh:mesh.Mesh1D_SPM.add_node}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{add\_node}}}{\emph{\DUrole{n}{x}}, \emph{\DUrole{n}{initial\_concentration}}}{}
 \sphinxAtStartPar
-Adds a node based on x location, returns new node
+Adds a node based on x location.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Index identifier for location of the node.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{initial\_concentration}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Initial concentration of ions at each node. {[}mol/(m\textasciicircum{}3){]}
+
+\end{itemize}
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -260,6 +407,23 @@ Adds a node based on x location, returns new node
 \phantomsection\label{\detokenize{mesh:mesh.Mesh1D_SPM.add_nodes}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{add\_nodes}}}{\emph{\DUrole{n}{length}}, \emph{\DUrole{n}{n\_elements}}, \emph{\DUrole{n}{initial\_concentration}}}{}
 \sphinxAtStartPar
 Add nodes of a length with n\_elements
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{length}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Length of nodes to add.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{n\_elements}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Number of nodes to add.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{initial\_concentration}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Initial concentration of ions at each node. {[}mol/(m\textasciicircum{}3){]}
+
+\end{itemize}
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -269,6 +433,30 @@ Add nodes of a length with n\_elements
 \phantomsection\label{\detokenize{mesh:mesh.Mesh1D_SPM.get_concentration_by_id}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_concentration\_by\_id}}}{\emph{\DUrole{n}{node\_id}}, \emph{\DUrole{n}{timestep}}}{}
 \sphinxAtStartPar
 Get concentration at a node, and return
+
+\sphinxAtStartPar
+Add nodes of a specified length with n\_elements.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{node\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Unique identifier for a node.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{timestep}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Current timestep.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+Node concentration
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+{[}double{]}
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -281,6 +469,12 @@ Get concentration at a node, and return
 \label{\detokenize{node:module-node}}\label{\detokenize{node:node-module}}\label{\detokenize{node::doc}}\index{module@\spxentry{module}!node@\spxentry{node}}\index{node@\spxentry{node}!module@\spxentry{module}}
 \sphinxAtStartPar
 Node
+
+\sphinxAtStartPar
+Node is a parent class for classes that describe the points in the mesh
+for each type of problem. A Node is a general representation of a point 
+in space. This parent class does not define the dimensionality or any 
+other attributes.
 \index{Node (class in node)@\spxentry{Node}\spxextra{class in node}}
 
 \begin{fulllineitems}
@@ -290,6 +484,23 @@ Bases: \sphinxcode{\sphinxupquote{object}}
 
 \sphinxAtStartPar
 Node class
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{mesh}} (\sphinxstyleliteralemphasis{\sphinxupquote{mesh}}\sphinxstyleliteralemphasis{\sphinxupquote{ {[}}}\sphinxstyleliteralemphasis{\sphinxupquote{Mesh}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Mesh
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{node\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Unique identifier for a node.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{x}}\sphinxstyleliteralemphasis{\sphinxupquote{ {[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Index identifier for location of the node.
+
+\end{itemize}
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -302,6 +513,27 @@ Bases: {\hyperref[\detokenize{node:node.Node}]{\sphinxcrossref{\sphinxcode{\sphi
 
 \sphinxAtStartPar
 Node\_SPM class, subset of Node
+
+\sphinxAtStartPar
+Inherits Node. This is the implementation of Node for SPM
+modeling.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{mesh}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{Mesh}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Mesh
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{node\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Unique identifier for a node.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Index Identifier for location of the node.
+
+\end{itemize}
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
@@ -319,21 +551,29 @@ Node\_SPM class, subset of Node
 \section{Installation}
 \label{\detokenize{usage:installation}}\label{\detokenize{usage:id1}}
 \sphinxAtStartPar
-To use libsim, first install it using the following terminal command. This will
-pull the newest version of the libsim library.
+The third\sphinxhyphen{}party packages required are: \sphinxtitleref{python3}, \sphinxtitleref{numpy}, \sphinxtitleref{scipy.interpolate},
+\sphinxtitleref{math}, and \sphinxtitleref{matplotlib}. These packages can all be installed via \sphinxtitleref{pip3}.
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZdl{} }git clone https://github.com/jerryzxiang/libsim.git
-\end{sphinxVerbatim}
+\sphinxAtStartPar
+The repo can be cloned from \sphinxtitleref{https://github.com/jerryzxiang/libsim.git} or
+installed via
 
 
 \section{Modeling Batteries}
 \label{\detokenize{usage:modeling-batteries}}
 \sphinxAtStartPar
-TO DO
+This program is run through the driver code file, \sphinxtitleref{main.py}, which takes 8
+command line arguments. As of now, there is no GUI. The inputs are the cathode,
+anode, input current, capacity of the cell in amp hours, the number of radial
+segments, the simulation time in seconds, and the time steps. An example is
+shown here for an LIB with an LFP cathode and graphite anode:
 
 \sphinxAtStartPar
-This is where we describe how to model batteries. How we use the libsim package.
+To get help, use \sphinxtitleref{python3 main.py \sphinxhyphen{}h’}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZdl{} }git clone https://github.com/jerryzxiang/libsim.git
+\end{sphinxVerbatim}
 
 
 \chapter{Profiling}
@@ -345,11 +585,15 @@ TO DO
 \chapter{Lessons Learned}
 \label{\detokenize{lessons_learned:lessons-learned}}\label{\detokenize{lessons_learned::doc}}
 \sphinxAtStartPar
-Figure out good ways to verify tests when using a variety of parameters,
-as most of our work is looking at experimental data which is difficult to source.
+Figured out good ways to verify tests when using a variety of parameters,
+as most of our work is looking at experimental data which is difficult
+to source.
 
 \sphinxAtStartPar
-TO DO…
+Pair programming was very useful for catching bugs early on.
+
+\sphinxAtStartPar
+Commit often, establish workflow early
 
 
 \chapter{Future Work}

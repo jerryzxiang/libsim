@@ -5,7 +5,16 @@ import numpy as np
 
 def first_derivative(Mesh, coefficient, timestep):  
     '''
-    Calculates the first derivative in Fick's Law
+    Calculates the first derivative in Fick's Law using a "phantom node".
+
+    :param Mesh: Mesh for which the derivative is to be evaluated.
+    :type Mesh: [Mesh]
+    :param coefficient: Scalar coefficient for the derivative.
+    :type coefficient: [double]
+    :param timestep: Index for the timestep of the current derivative.
+    :type timestep: [int]
+    :return: The first derivative of Fick's Law for each of the nodes in the Mesh.
+    :rtype: [double]
     '''
     #The coefficient to be passed is a function
     #Mesh is the mesh for which the derivative is to be evaluated.
@@ -25,9 +34,16 @@ def first_derivative(Mesh, coefficient, timestep):
         
 def second_derivative(Mesh, coefficient, timestep):
     '''
-    Calculates the second derivative in Fick's Law
-    The coefficient to be passed is a function
-    Mesh is the mesh for which the derivative is to be evaluated.
+   Calculates the second derivative in Fick's Law using a "phantom node".
+
+    :param Mesh: Mesh for which the derivative is to be evaluated.
+    :type Mesh: [Mesh]
+    :param coefficient: Scalar coefficient for the derivative.
+    :type coefficient: [double]
+    :param timestep: Index for the timestep of the current derivative.
+    :type timestep: [int]
+    :return: The second derivative of Fick's Law for each of the nodes in the Mesh.
+    :rtype: [double]
     '''
     second_derivative = np.zeros([Mesh.n_nodes, 1])
     

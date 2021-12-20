@@ -8,6 +8,14 @@ import arguments as ag
 def simulation_step(electrode, timestep_id, dt):
     '''
     Advances the simulation one step
+
+    :param electrode: electrode instance
+    :type electrode: [electrode]
+    :param timestep_id: index for the timestep.
+    :type timestep_id: [int]
+    :param dt: length of the timestep
+    :type dt: [double]
+
     '''
     #Take the euler step for the interior nodes
     euler_step(electrode, timestep_id, dt)
@@ -25,6 +33,13 @@ def simulation_step(electrode, timestep_id, dt):
 def euler_step(electrode, timestep_id, dt):
     '''
     Euler stepper
+    
+    :param electrode: electrode instance
+    :type electrode: [electrode]
+    :param timestep_id: index for the timestep.
+    :type timestep_id: [int]
+    :param dt: length of the timestep
+    :type dt: [double]
     '''
     arg1 = first_derivative(electrode.Mesh, 1.0, timestep_id)
     arg2 = second_derivative(electrode.Mesh, 1.0, timestep_id)
@@ -45,6 +60,12 @@ def euler_step(electrode, timestep_id, dt):
 def apply_neumann_bc(mesh, timestep_id):
     '''
     Applies Neumann boundary conditions
+
+    :param mesh: mesh to which conditions will be applied to.
+    :type mesh: [mesh]
+    :param timestep_id: index for the timestep.
+    :type timestep_id: [int]
+
     '''
     mesh.node_container[0].concentration[0, timestep_id + 1] = (
         mesh.node_container[1].concentration[0, timestep_id + 1])
@@ -53,6 +74,14 @@ def apply_neumann_bc(mesh, timestep_id):
 def apply_dirichlet_bc(mesh, timestep_id, surface_c):
     '''
     Applies Dirichlet boundary conditions
+
+    :param mesh: mesh to which conditions will be applied to.
+    :type mesh: [mesh]
+    :param timestep_id: index for the timestep.
+    :type timestep_id: [int]
+    :param surface_c: concentration of the surface
+    :type surface_c: [double]
+
     '''
     n_nodes = mesh.n_nodes
     # Set concentration at final node container to be surface concentration
@@ -61,6 +90,14 @@ def apply_dirichlet_bc(mesh, timestep_id, surface_c):
 def calculate_surface_concentration(electrode, timestep_id):
     '''
     Calculates surface concentration
+
+    :param electrode: electrode instance for which surface concentration will be calculated.
+    :type electrode: [electrode]
+    :param timestep_id: index for the timestep.
+    :type timestep_id: [int]
+    :return: The surface concentration.
+    :rtype: [double]
+
     '''
     n_nodes = electrode.Mesh.n_nodes
     surface_term = (electrode.Mesh.dr * (electrode.input_current) / (
