@@ -57,17 +57,30 @@ class Electrode():
         
         '''
         self.Mesh = Mesh1D_SPM(n_timestep)
-        self.Mesh.add_nodes(length, n_elements, initial_concentration)        
+        self.Mesh.add_nodes(length, n_elements, initial_concentration)   
 
+    #def electrode_potential(self, concentration_list, potential_ref,
+    #                        concentrations_electrode):
+    def electrode_potential(self, node_container):
+        '''
+        Interpolates concentration values between reference potentials
+        '''
+        potential = np.zeros(len(ag.time_history))
+        function1 = scipy.interpolate.pchip_interpolate(self.concentration_list, self.reference_potential,
+                                                 ag.time_history)
+        #for i in range(0, len(ag.time_history)):
+            #potential[i] = scipy.interpolate.pchip_interpolate(self.concentration_list, 
+            #                        self.reference_potential, node_container.concentration[0,i])
+        #    potential[i] = self.potential_interpolator(i)
+        #    print(potential[i])
+        return function1
+    '''
     def get_voltage(self, cathode_potential, anode_potential, INPUT_CURRENT, internal_resistance):
-        '''
-        Returns voltage from input concentration
-        '''
         potential_diff = cathode_potential - anode_potential
         internal_potential = INPUT_CURRENT * internal_resistance
         voltage = potential_diff + internal_potential
         return voltage
-    
+    '''
     def set_input_current(self, input_current):
         '''
         Sets input current

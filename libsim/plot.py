@@ -10,12 +10,12 @@ import parameters.paramLibrary as pl
 import parameters.referencePotentials as rp
 
 # plotting voltage vs time
-def plot_voltage(time, voltage):
+def plot_voltage(voltage):
   plt.figure()
   plt.title('Voltage')
   plt.xlabel('Time [min]')
   plt.ylabel('Potential [V]')
-  plt.plot(time, voltage)
+  plt.plot(voltage)
   plt.show()
 
 def plot_concentration(time, electrode, electrode_type):

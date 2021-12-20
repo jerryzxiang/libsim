@@ -40,13 +40,20 @@ class BatteryCell():
         self.anode=Electrode(diffusivity, particle_radius, max_ion_concentration,
                              self.capacity_coulomb)
         self.anode.input_current = ag.INPUT_CURRENT
-        
+    '''  
     def get_voltage(self):
-        '''
-        Returns voltage from input concentration
-        '''
+        
+        #Returns voltage from input concentration
+        
         potential_diff = self.cathode.potential_history - (
             self.anode.potential_history)
         internal_potential = self.anode.input_current * self.internal_resistance
+        voltage = potential_diff + internal_potential
+        return voltage
+    '''
+
+    def get_voltage(self, cathode_potential, anode_potential, INPUT_CURRENT, internal_resistance):
+        potential_diff = cathode_potential - anode_potential
+        internal_potential = INPUT_CURRENT * internal_resistance
         voltage = potential_diff + internal_potential
         return voltage

@@ -7,6 +7,8 @@ import scipy.interpolate
 import matplotlib.pyplot as plt
 
 from batterycell import BatteryCell as BatteryCell
+from electrode import Electrode
+from solver import calculate_surface_concentration
 from mesh import Mesh1D_SPM as Mesh1D_SPM
 from derivative import second_derivative
 from derivative import first_derivative
@@ -15,7 +17,7 @@ import parameters.referencePotentials as rp
 import arguments as ag
 import plot
 
-np.seterr(all = 'raise')
+np.seterr(all = 'warn')
 
 def main():
     # Instantiate battery_cell
@@ -26,9 +28,11 @@ def main():
                             ag.MAX_ION_CONCENTRATION_ANODE)
 
     # Create potential look up tables for cathode and anode
-    battery_cell.cathode.create_potential_lookup_tables(rp.cathode_potential_ref_array[ag.args.cathode])
-    battery_cell.anode.create_potential_lookup_tables(rp.anode_potential_ref_array[ag.args.anode])
-            
+    cathode_potential_ref = rp.cathode_potential_ref_array[ag.args.cathode]
+    anode_potential_ref = rp.anode_potential_ref_array[ag.args.anode]
+    battery_cell.cathode.create_potential_lookup_tables(cathode_potential_ref)
+    battery_cell.anode.create_potential_lookup_tables(anode_potential_ref)
+    
     # shorthand
     cathode = battery_cell.cathode
     anode = battery_cell.anode
@@ -43,18 +47,34 @@ def main():
 
     endtime = ag.n_timestep
     # Run simulation
-    for i in range(0, endtime-1):
+    for i in range(0, endtime - 1):
         cathode.simulation_step(i, ag.DT)
         anode.simulation_step(i, ag.DT)
 
-    voltage = battery_cell.get_voltage()
+
+    #voltage = battery_cell.get_voltage()
+    cathode_voltage = cathode.electrode_potential(cathode.Mesh.node_container[ag.N_SEGMENTS])
+    plt.figure()
+    plt.plot(ag.time_history, cathode_voltage)
+    plt.show()
+    anode_voltage = anode.electrode_potential(anode.Mesh.node_container[ag.N_SEGMENTS])
+    #print('cathode voltage', cathode_voltage)
+
+    voltage = battery_cell.get_voltage(cathode_voltage, anode_voltage, 
+                                    ag.INPUT_CURRENT, ag.INTERNAL_RESISTANCE
+                                )
+    #print('len voltage', len(voltage))
+    #voltage_array = np.zeros(len(ag.time_history))
+    #for i in range(0, len(ag.time_history)):
+    #    voltage_array[i] = battery_cell.get_voltage()
 
     # Plot voltage
-    plot.plot_voltage(ag.minutes, voltage)
+    plot.plot_voltage(cathode.reference_potential)
+    plot.plot_voltage(voltage)
 
     # Plot concentrations for both electrodes
-    plot.plot_concentration(ag.minutes, cathode, 'Cathode')
-    plot.plot_concentration(ag.minutes, anode, 'Anode')
+    #plot.plot_concentration(ag.minutes, cathode, 'Cathode')
+    #plot.plot_concentration(ag.minutes, anode, 'Anode')
 
 # Run 
 main()
