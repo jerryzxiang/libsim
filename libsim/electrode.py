@@ -13,8 +13,12 @@ class Electrode():
     '''
     Electrode class
     Contains several variables:
-    diffusivity, particle_radius, max_ion_concentration, charge
-    number_moles, volume
+    diffusivity [m$^{2}$ s$^{-1}$],
+    particle_radius [m],
+    max_ion_concentration [mol m$^{-3}$],
+    charge [C], 
+    number_moles, 
+    volume [m$^{3}$]
     '''
     def __init__(self, diffusivity, particle_radius, max_ion_concentration, charge):
         '''
@@ -71,7 +75,7 @@ class Electrode():
 
     def set_input_current(self, input_current):
         '''
-        Sets input current
+        Sets input current [A]
         '''
         self.input_current = input_current
     
