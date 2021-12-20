@@ -11,7 +11,7 @@ import parameters.referencePotentials as rp
 import arguments as ag
 
 # plotting voltage vs time
-def plot_voltage(voltage,time, title):
+def plot_voltage(time,voltage, title):
   plt.figure()
   plt.title(title)
   plt.xlabel('Time [min]')
