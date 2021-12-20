@@ -59,14 +59,14 @@ def main():
                                     ag.INPUT_CURRENT, ag.INTERNAL_RESISTANCE)
     
     # Plot electrode potential vs time
-    plot.plot_voltage(cathode.reference_potential,
+    plot.plot_voltage(cathode.Mesh.node_container[-1].concentration[0,:],ag.minutes,
                         'Reference Potential vs Time - Cathode - ' 
                         + str(ag.args.cathode))
-    plot.plot_voltage(anode.reference_potential,
+    plot.plot_voltage(anode.Mesh.node_container[-1].concentration[0,:],ag.minutes,
                     'Reference Potential vs Time - Anode - '
                     + str(ag.args.anode))                    
     # Plot battery voltage vs time  
-    plot.plot_voltage(voltage, 
+    plot.plot_voltage(voltage, ag.minutes,
                         'Battery Voltage vs. Time (Charging) - ' 
                         + str(ag.args.cathode) + '/' 
                         + str(ag.args.anode))
