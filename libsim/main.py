@@ -69,8 +69,8 @@ def main():
                         + str(ag.args.anode))
 
     # Plot concentrations for both electrodes
-    plot.plot_concentration(cathode, cathode_potential_ref, 'Cathode')
-    plot.plot_concentration(anode, anode_potential_ref, 'Anode')
+    plot.plot_concentration(cathode, cathode_potential, 'Cathode')
+    plot.plot_concentration(anode, anode_potential, 'Anode')
 
 # Run 
 main()
