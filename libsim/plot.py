@@ -11,12 +11,12 @@ import parameters.referencePotentials as rp
 import arguments as ag
 
 # plotting voltage vs time
-def plot_voltage(voltage, title):
+def plot_voltage(time,voltage, title):
   plt.figure()
   plt.title(title)
   plt.xlabel('Time [min]')
   plt.ylabel('Potential [V]')
-  plt.plot(voltage)
+  plt.plot(voltage,time)
   plt.show()
 
 # plotting ion concentration vs time
