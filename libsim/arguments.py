@@ -13,6 +13,8 @@ import parameters.referencePotentials as rp
 
 # constant
 FARADAY_NUMBER = 9.64853399e4
+C_INDEX = 0.85
+A_INDEX = 0.18
 
 # Getting cathode and anode dict 
 C_dict = pl.cathodeDict

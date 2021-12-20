@@ -2,6 +2,7 @@
 Driver code file
 """
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 
 from batterycell import BatteryCell as BatteryCell
@@ -36,12 +37,14 @@ def main():
     anode.create_potential_lookup_tables(anode_potential_ref)
     
     # Initialize the cathode
-    cathode_initial_c = cathode.concentration_list[28]
+    cathode_initial_c = cathode.concentration_list[math.floor(ag.C_INDEX*
+                                    len(rp.cathode_potential_ref_array))]
     cathode.mesh_initialize(ag.R_CATHODE, ag.N_SEGMENTS, 
                             ag.n_timestep, cathode_initial_c)
 
     # Initialize the anode
-    anode_initial_c = anode.concentration_list[6]
+    anode_initial_c = anode.concentration_list[math.floor(ag.A_INDEX*
+                                    len(rp.anode_potential_ref_array))]
     anode.mesh_initialize(ag.R_ANODE, ag.N_SEGMENTS, 
                         ag.n_timestep, anode_initial_c)
 
