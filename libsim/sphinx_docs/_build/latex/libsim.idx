@@ -1,17 +1,43 @@
-\indexentry{module@\spxentry{module}!derivative@\spxentry{derivative}|hyperpage}{9}
-\indexentry{derivative@\spxentry{derivative}!module@\spxentry{module}|hyperpage}{9}
-\indexentry{first\_derivative() (in module derivative)@\spxentry{first\_derivative()}\spxextra{in module derivative}|hyperpage}{9}
-\indexentry{second\_derivative() (in module derivative)@\spxentry{second\_derivative()}\spxextra{in module derivative}|hyperpage}{9}
-\indexentry{module@\spxentry{module}!mesh@\spxentry{mesh}|hyperpage}{10}
-\indexentry{mesh@\spxentry{mesh}!module@\spxentry{module}|hyperpage}{10}
-\indexentry{Mesh1D (class in mesh)@\spxentry{Mesh1D}\spxextra{class in mesh}|hyperpage}{10}
-\indexentry{add\_node() (mesh.Mesh1D method)@\spxentry{add\_node()}\spxextra{mesh.Mesh1D method}|hyperpage}{10}
-\indexentry{add\_nodes() (mesh.Mesh1D method)@\spxentry{add\_nodes()}\spxextra{mesh.Mesh1D method}|hyperpage}{10}
-\indexentry{Mesh1D\_SPM (class in mesh)@\spxentry{Mesh1D\_SPM}\spxextra{class in mesh}|hyperpage}{10}
-\indexentry{add\_node() (mesh.Mesh1D\_SPM method)@\spxentry{add\_node()}\spxextra{mesh.Mesh1D\_SPM method}|hyperpage}{10}
-\indexentry{add\_nodes() (mesh.Mesh1D\_SPM method)@\spxentry{add\_nodes()}\spxextra{mesh.Mesh1D\_SPM method}|hyperpage}{10}
-\indexentry{get\_concentration\_by\_id() (mesh.Mesh1D\_SPM method)@\spxentry{get\_concentration\_by\_id()}\spxextra{mesh.Mesh1D\_SPM method}|hyperpage}{11}
-\indexentry{module@\spxentry{module}!node@\spxentry{node}|hyperpage}{11}
-\indexentry{node@\spxentry{node}!module@\spxentry{module}|hyperpage}{11}
-\indexentry{Node (class in node)@\spxentry{Node}\spxextra{class in node}|hyperpage}{11}
-\indexentry{Node\_SPM (class in node)@\spxentry{Node\_SPM}\spxextra{class in node}|hyperpage}{11}
+\indexentry{module@\spxentry{module}!batterycell@\spxentry{batterycell}|hyperpage}{9}
+\indexentry{batterycell@\spxentry{batterycell}!module@\spxentry{module}|hyperpage}{9}
+\indexentry{BatteryCell (class in batterycell)@\spxentry{BatteryCell}\spxextra{class in batterycell}|hyperpage}{9}
+\indexentry{create\_anode() (batterycell.BatteryCell method)@\spxentry{create\_anode()}\spxextra{batterycell.BatteryCell method}|hyperpage}{9}
+\indexentry{create\_cathode() (batterycell.BatteryCell method)@\spxentry{create\_cathode()}\spxextra{batterycell.BatteryCell method}|hyperpage}{9}
+\indexentry{get\_voltage() (batterycell.BatteryCell method)@\spxentry{get\_voltage()}\spxextra{batterycell.BatteryCell method}|hyperpage}{9}
+\indexentry{module@\spxentry{module}!derivative@\spxentry{derivative}|hyperpage}{10}
+\indexentry{derivative@\spxentry{derivative}!module@\spxentry{module}|hyperpage}{10}
+\indexentry{first\_derivative() (in module derivative)@\spxentry{first\_derivative()}\spxextra{in module derivative}|hyperpage}{10}
+\indexentry{second\_derivative() (in module derivative)@\spxentry{second\_derivative()}\spxextra{in module derivative}|hyperpage}{10}
+\indexentry{module@\spxentry{module}!electrode@\spxentry{electrode}|hyperpage}{10}
+\indexentry{electrode@\spxentry{electrode}!module@\spxentry{module}|hyperpage}{10}
+\indexentry{Electrode (class in electrode)@\spxentry{Electrode}\spxextra{class in electrode}|hyperpage}{10}
+\indexentry{calculate\_effective\_area() (electrode.Electrode method)@\spxentry{calculate\_effective\_area()}\spxextra{electrode.Electrode method}|hyperpage}{10}
+\indexentry{create\_potential\_lookup\_tables() (electrode.Electrode method)@\spxentry{create\_potential\_lookup\_tables()}\spxextra{electrode.Electrode method}|hyperpage}{10}
+\indexentry{electrode\_potential() (electrode.Electrode method)@\spxentry{electrode\_potential()}\spxextra{electrode.Electrode method}|hyperpage}{10}
+\indexentry{mesh\_initialize() (electrode.Electrode method)@\spxentry{mesh\_initialize()}\spxextra{electrode.Electrode method}|hyperpage}{11}
+\indexentry{set\_input\_current() (electrode.Electrode method)@\spxentry{set\_input\_current()}\spxextra{electrode.Electrode method}|hyperpage}{11}
+\indexentry{simulation\_step() (electrode.Electrode method)@\spxentry{simulation\_step()}\spxextra{electrode.Electrode method}|hyperpage}{11}
+\indexentry{module@\spxentry{module}!mesh@\spxentry{mesh}|hyperpage}{11}
+\indexentry{mesh@\spxentry{mesh}!module@\spxentry{module}|hyperpage}{11}
+\indexentry{Mesh1D (class in mesh)@\spxentry{Mesh1D}\spxextra{class in mesh}|hyperpage}{11}
+\indexentry{add\_node() (mesh.Mesh1D method)@\spxentry{add\_node()}\spxextra{mesh.Mesh1D method}|hyperpage}{11}
+\indexentry{add\_nodes() (mesh.Mesh1D method)@\spxentry{add\_nodes()}\spxextra{mesh.Mesh1D method}|hyperpage}{11}
+\indexentry{Mesh1D\_SPM (class in mesh)@\spxentry{Mesh1D\_SPM}\spxextra{class in mesh}|hyperpage}{11}
+\indexentry{add\_node() (mesh.Mesh1D\_SPM method)@\spxentry{add\_node()}\spxextra{mesh.Mesh1D\_SPM method}|hyperpage}{12}
+\indexentry{add\_nodes() (mesh.Mesh1D\_SPM method)@\spxentry{add\_nodes()}\spxextra{mesh.Mesh1D\_SPM method}|hyperpage}{12}
+\indexentry{get\_concentration\_by\_id() (mesh.Mesh1D\_SPM method)@\spxentry{get\_concentration\_by\_id()}\spxextra{mesh.Mesh1D\_SPM method}|hyperpage}{12}
+\indexentry{module@\spxentry{module}!node@\spxentry{node}|hyperpage}{12}
+\indexentry{node@\spxentry{node}!module@\spxentry{module}|hyperpage}{12}
+\indexentry{Node (class in node)@\spxentry{Node}\spxextra{class in node}|hyperpage}{12}
+\indexentry{Node\_SPM (class in node)@\spxentry{Node\_SPM}\spxextra{class in node}|hyperpage}{12}
+\indexentry{module@\spxentry{module}!plot@\spxentry{plot}|hyperpage}{13}
+\indexentry{plot@\spxentry{plot}!module@\spxentry{module}|hyperpage}{13}
+\indexentry{plot\_concentration() (in module plot)@\spxentry{plot\_concentration()}\spxextra{in module plot}|hyperpage}{13}
+\indexentry{plot\_voltage() (in module plot)@\spxentry{plot\_voltage()}\spxextra{in module plot}|hyperpage}{13}
+\indexentry{module@\spxentry{module}!solver@\spxentry{solver}|hyperpage}{13}
+\indexentry{solver@\spxentry{solver}!module@\spxentry{module}|hyperpage}{13}
+\indexentry{apply\_dirichlet\_bc() (in module solver)@\spxentry{apply\_dirichlet\_bc()}\spxextra{in module solver}|hyperpage}{13}
+\indexentry{apply\_neumann\_bc() (in module solver)@\spxentry{apply\_neumann\_bc()}\spxextra{in module solver}|hyperpage}{13}
+\indexentry{calculate\_surface\_concentration() (in module solver)@\spxentry{calculate\_surface\_concentration()}\spxextra{in module solver}|hyperpage}{13}
+\indexentry{euler\_step() (in module solver)@\spxentry{euler\_step()}\spxextra{in module solver}|hyperpage}{13}
+\indexentry{simulation\_step() (in module solver)@\spxentry{simulation\_step()}\spxextra{in module solver}|hyperpage}{14}

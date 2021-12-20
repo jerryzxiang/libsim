@@ -200,7 +200,94 @@ doesn’t need to be coupled with only the electrode class.
 \label{\detokenize{arguments:arguments-module}}\label{\detokenize{arguments::doc}}
 
 \section{batterycell module}
-\label{\detokenize{batterycell:batterycell-module}}\label{\detokenize{batterycell::doc}}
+\label{\detokenize{batterycell:module-batterycell}}\label{\detokenize{batterycell:batterycell-module}}\label{\detokenize{batterycell::doc}}\index{module@\spxentry{module}!batterycell@\spxentry{batterycell}}\index{batterycell@\spxentry{batterycell}!module@\spxentry{module}}
+\sphinxAtStartPar
+BatteryCell
+\index{BatteryCell (class in batterycell)@\spxentry{BatteryCell}\spxextra{class in batterycell}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{batterycell:batterycell.BatteryCell}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{batterycell.}}\sphinxbfcode{\sphinxupquote{BatteryCell}}}{\emph{\DUrole{n}{capacity\_amp\_hour}}, \emph{\DUrole{n}{internal\_resistance}}}{}
+\sphinxAtStartPar
+Bases: \sphinxcode{\sphinxupquote{object}}
+
+\sphinxAtStartPar
+BatteryCell model class
+Contains
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{capacity\_amp\_hour}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Amp Hour of the system.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{internal\_resistance}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Internal resistance of the battery.
+
+\end{itemize}
+
+\end{description}\end{quote}
+\index{create\_anode() (batterycell.BatteryCell method)@\spxentry{create\_anode()}\spxextra{batterycell.BatteryCell method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{batterycell:batterycell.BatteryCell.create_anode}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{create\_anode}}}{\emph{\DUrole{n}{diffusivity}}, \emph{\DUrole{n}{particle\_radius}}, \emph{\DUrole{n}{max\_ion\_concentration}}}{}
+\sphinxAtStartPar
+Creates anode containing parameters from Electrode class.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{diffusivity}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Diffusivity desired for the battery model. {[}(m\textasciicircum{}2)/s{]}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{particle\_radius}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Particle radius of the battery model particles. {[}m{]}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{max\_ion\_concetration}} \textendash{} Maximum desired ion concentration. {[}mol/(m\textasciicircum{}3){]}
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{create\_cathode() (batterycell.BatteryCell method)@\spxentry{create\_cathode()}\spxextra{batterycell.BatteryCell method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{batterycell:batterycell.BatteryCell.create_cathode}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{create\_cathode}}}{\emph{\DUrole{n}{diffusivity}}, \emph{\DUrole{n}{particle\_radius}}, \emph{\DUrole{n}{max\_ion\_concentration}}}{}
+\sphinxAtStartPar
+Creates cathode containing parameters from the Electrode Class.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{diffusivity}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Diffusivity desired for the battery model. {[}(m\textasciicircum{}2)/s{]}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{particle\_radius}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Particle radius of the battery model particles. {[}m{]}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{max\_ion\_concetration}} \textendash{} Maximum desired ion concentration. {[}mol/(m\textasciicircum{}3){]}
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{get\_voltage() (batterycell.BatteryCell method)@\spxentry{get\_voltage()}\spxextra{batterycell.BatteryCell method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{batterycell:batterycell.BatteryCell.get_voltage}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_voltage}}}{\emph{\DUrole{n}{cathode\_potential}}, \emph{\DUrole{n}{anode\_potential}}, \emph{\DUrole{n}{INPUT\_CURRENT}}, \emph{\DUrole{n}{internal\_resistance}}}{}
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
 
 \section{derivative module}
 \label{\detokenize{derivative:module-derivative}}\label{\detokenize{derivative:derivative-module}}\label{\detokenize{derivative::doc}}\index{module@\spxentry{module}!derivative@\spxentry{derivative}}\index{derivative@\spxentry{derivative}!module@\spxentry{module}}
@@ -288,7 +375,147 @@ The second derivative of Fick’s Law for each of the nodes in the Mesh.
 
 
 \section{electrode module}
-\label{\detokenize{electrode:electrode-module}}\label{\detokenize{electrode::doc}}
+\label{\detokenize{electrode:module-electrode}}\label{\detokenize{electrode:electrode-module}}\label{\detokenize{electrode::doc}}\index{module@\spxentry{module}!electrode@\spxentry{electrode}}\index{electrode@\spxentry{electrode}!module@\spxentry{module}}
+\sphinxAtStartPar
+Electrode
+\index{Electrode (class in electrode)@\spxentry{Electrode}\spxextra{class in electrode}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{electrode:electrode.Electrode}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{electrode.}}\sphinxbfcode{\sphinxupquote{Electrode}}}{\emph{\DUrole{n}{diffusivity}}, \emph{\DUrole{n}{particle\_radius}}, \emph{\DUrole{n}{max\_ion\_concentration}}, \emph{\DUrole{n}{charge}}}{}
+\sphinxAtStartPar
+Bases: \sphinxcode{\sphinxupquote{object}}
+
+\sphinxAtStartPar
+Electrode class
+Contains several variables:
+diffusivity (m\textasciicircum{}2)/s{]},
+particle\_radius {[}m{]},
+max\_ion\_concentration {[}mol/(m\textasciicircum{}3){]},
+charge {[}C{]}, 
+number\_moles {[}mol{]}, 
+volume {[}m\textasciicircum{}3{]}
+\index{calculate\_effective\_area() (electrode.Electrode method)@\spxentry{calculate\_effective\_area()}\spxextra{electrode.Electrode method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{electrode:electrode.Electrode.calculate_effective_area}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{calculate\_effective\_area}}}{}{}
+\sphinxAtStartPar
+Calculates the effective area from the particle radius and 
+particle number, which is calculated from the particle volume:
+\begin{quote}\begin{description}
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+effective area from particle volume {[}m\textasciicircum{}3{]}
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+{[}double{]}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{create\_potential\_lookup\_tables() (electrode.Electrode method)@\spxentry{create\_potential\_lookup\_tables()}\spxextra{electrode.Electrode method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{electrode:electrode.Electrode.create_potential_lookup_tables}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{create\_potential\_lookup\_tables}}}{\emph{\DUrole{n}{ref\_list}}}{}
+\sphinxAtStartPar
+Creates a potential lookup table based on a reference list.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{ref\_list}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{numpy array}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Reference list as base for potential lookup table.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{electrode\_potential() (electrode.Electrode method)@\spxentry{electrode\_potential()}\spxextra{electrode.Electrode method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{electrode:electrode.Electrode.electrode_potential}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{electrode\_potential}}}{\emph{\DUrole{n}{node\_container}}}{}
+\sphinxAtStartPar
+Returns potential of the electrode.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{node\_container}} \textendash{} List of node objects.
+
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+potential\_function
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+{[}double{]}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{mesh\_initialize() (electrode.Electrode method)@\spxentry{mesh\_initialize()}\spxextra{electrode.Electrode method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{electrode:electrode.Electrode.mesh_initialize}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{mesh\_initialize}}}{\emph{\DUrole{n}{length}}, \emph{\DUrole{n}{n\_elements}}, \emph{\DUrole{n}{n\_timestep}}, \emph{\DUrole{n}{initial\_concentration}}}{}
+\sphinxAtStartPar
+Initializes the mesh for numerical calculations.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{length}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Length of the line segment on which the mesh is generated.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{n\_elements}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Number of elements that the length will be split into.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{n\_timestep}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Number of timesteps to be analyzed.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{initial\_concentration}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Initial concentration of nodes.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{set\_input\_current() (electrode.Electrode method)@\spxentry{set\_input\_current()}\spxextra{electrode.Electrode method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{electrode:electrode.Electrode.set_input_current}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{set\_input\_current}}}{\emph{\DUrole{n}{input\_current}}}{}
+\sphinxAtStartPar
+Sets input current
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{input\_current}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Input Current set for the electrode. {[}A{]}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{simulation\_step() (electrode.Electrode method)@\spxentry{simulation\_step()}\spxextra{electrode.Electrode method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{electrode:electrode.Electrode.simulation_step}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{simulation\_step}}}{\emph{\DUrole{n}{timestep\_id}}, \emph{\DUrole{n}{dt}}}{}
+\sphinxAtStartPar
+Simulates a step.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{timestep\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} Index for the timestep of the current derivative.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
 
 \section{main module}
 \label{\detokenize{main:main-module}}\label{\detokenize{main::doc}}
@@ -540,10 +767,158 @@ modeling.
 
 
 \section{plot module}
-\label{\detokenize{plot:plot-module}}\label{\detokenize{plot::doc}}
+\label{\detokenize{plot:module-plot}}\label{\detokenize{plot:plot-module}}\label{\detokenize{plot::doc}}\index{module@\spxentry{module}!plot@\spxentry{plot}}\index{plot@\spxentry{plot}!module@\spxentry{module}}
+\sphinxAtStartPar
+module to plot battery parameters over time
+\index{plot\_concentration() (in module plot)@\spxentry{plot\_concentration()}\spxextra{in module plot}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{plot:plot.plot_concentration}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{plot.}}\sphinxbfcode{\sphinxupquote{plot\_concentration}}}{\emph{\DUrole{n}{electrode}}, \emph{\DUrole{n}{potential}}, \emph{\DUrole{n}{electrode\_type}}}{}
+\end{fulllineitems}
+
+\index{plot\_voltage() (in module plot)@\spxentry{plot\_voltage()}\spxextra{in module plot}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{plot:plot.plot_voltage}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{plot.}}\sphinxbfcode{\sphinxupquote{plot\_voltage}}}{\emph{\DUrole{n}{time}}, \emph{\DUrole{n}{voltage}}, \emph{\DUrole{n}{title}}}{}
+\end{fulllineitems}
+
+
 
 \section{solver module}
-\label{\detokenize{solver:solver-module}}\label{\detokenize{solver::doc}}
+\label{\detokenize{solver:module-solver}}\label{\detokenize{solver:solver-module}}\label{\detokenize{solver::doc}}\index{module@\spxentry{module}!solver@\spxentry{solver}}\index{solver@\spxentry{solver}!module@\spxentry{module}}
+\sphinxAtStartPar
+Solver \sphinxhyphen{} simulation stepper
+\index{apply\_dirichlet\_bc() (in module solver)@\spxentry{apply\_dirichlet\_bc()}\spxextra{in module solver}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{solver:solver.apply_dirichlet_bc}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{solver.}}\sphinxbfcode{\sphinxupquote{apply\_dirichlet\_bc}}}{\emph{\DUrole{n}{mesh}}, \emph{\DUrole{n}{timestep\_id}}, \emph{\DUrole{n}{surface\_c}}}{}
+\sphinxAtStartPar
+Applies Dirichlet boundary conditions
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{mesh}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{mesh}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} mesh to which conditions will be applied to.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{timestep\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} index for the timestep.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{surface\_c}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} concentration of the surface
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{apply\_neumann\_bc() (in module solver)@\spxentry{apply\_neumann\_bc()}\spxextra{in module solver}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{solver:solver.apply_neumann_bc}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{solver.}}\sphinxbfcode{\sphinxupquote{apply\_neumann\_bc}}}{\emph{\DUrole{n}{mesh}}, \emph{\DUrole{n}{timestep\_id}}}{}
+\sphinxAtStartPar
+Applies Neumann boundary conditions
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{mesh}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{mesh}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} mesh to which conditions will be applied to.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{timestep\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} index for the timestep.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{calculate\_surface\_concentration() (in module solver)@\spxentry{calculate\_surface\_concentration()}\spxextra{in module solver}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{solver:solver.calculate_surface_concentration}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{solver.}}\sphinxbfcode{\sphinxupquote{calculate\_surface\_concentration}}}{\emph{\DUrole{n}{electrode}}, \emph{\DUrole{n}{timestep\_id}}}{}
+\sphinxAtStartPar
+Calculates surface concentration
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{electrode}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{electrode}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} electrode instance for which surface concentration will be calculated.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{timestep\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} index for the timestep.
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+\sphinxAtStartPar
+The surface concentration.
+
+\item[{Return type}] \leavevmode
+\sphinxAtStartPar
+{[}double{]}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{euler\_step() (in module solver)@\spxentry{euler\_step()}\spxextra{in module solver}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{solver:solver.euler_step}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{solver.}}\sphinxbfcode{\sphinxupquote{euler\_step}}}{\emph{\DUrole{n}{electrode}}, \emph{\DUrole{n}{timestep\_id}}, \emph{\DUrole{n}{dt}}}{}
+\sphinxAtStartPar
+Euler stepper
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{electrode}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{electrode}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} electrode instance
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{timestep\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} index for the timestep.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{dt}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} length of the timestep
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{simulation\_step() (in module solver)@\spxentry{simulation\_step()}\spxextra{in module solver}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{solver:solver.simulation_step}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{solver.}}\sphinxbfcode{\sphinxupquote{simulation\_step}}}{\emph{\DUrole{n}{electrode}}, \emph{\DUrole{n}{timestep\_id}}, \emph{\DUrole{n}{dt}}}{}
+\sphinxAtStartPar
+Advances the simulation one step
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{electrode}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{electrode}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} electrode instance
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{timestep\_id}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{int}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} index for the timestep.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{dt}} (\sphinxstyleliteralemphasis{\sphinxupquote{{[}}}\sphinxstyleliteralemphasis{\sphinxupquote{double}}\sphinxstyleliteralemphasis{\sphinxupquote{{]}}}) \textendash{} length of the timestep
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
 
 \chapter{Usage}
 \label{\detokenize{usage:usage}}\label{\detokenize{usage::doc}}
@@ -665,14 +1040,26 @@ future versions of libsim, we will look to implement PSeudo 2 Dimensional
 \renewcommand{\indexname}{Python Module Index}
 \begin{sphinxtheindex}
 \let\bigletter\sphinxstyleindexlettergroup
+\bigletter{b}
+\item\relax\sphinxstyleindexentry{batterycell}\sphinxstyleindexpageref{batterycell:\detokenize{module-batterycell}}
+\indexspace
 \bigletter{d}
 \item\relax\sphinxstyleindexentry{derivative}\sphinxstyleindexpageref{derivative:\detokenize{module-derivative}}
+\indexspace
+\bigletter{e}
+\item\relax\sphinxstyleindexentry{electrode}\sphinxstyleindexpageref{electrode:\detokenize{module-electrode}}
 \indexspace
 \bigletter{m}
 \item\relax\sphinxstyleindexentry{mesh}\sphinxstyleindexpageref{mesh:\detokenize{module-mesh}}
 \indexspace
 \bigletter{n}
 \item\relax\sphinxstyleindexentry{node}\sphinxstyleindexpageref{node:\detokenize{module-node}}
+\indexspace
+\bigletter{p}
+\item\relax\sphinxstyleindexentry{plot}\sphinxstyleindexpageref{plot:\detokenize{module-plot}}
+\indexspace
+\bigletter{s}
+\item\relax\sphinxstyleindexentry{solver}\sphinxstyleindexpageref{solver:\detokenize{module-solver}}
 \end{sphinxtheindex}
 
 \renewcommand{\indexname}{Index}

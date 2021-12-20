@@ -5,44 +5,88 @@
 \let\spxextra \sphinxstyleindexextra
 
   \bigletter A
-  \item \spxentry{add\_node()}\spxextra{mesh.Mesh1D method}, \hyperpage{10}
-  \item \spxentry{add\_node()}\spxextra{mesh.Mesh1D\_SPM method}, \hyperpage{10}
-  \item \spxentry{add\_nodes()}\spxextra{mesh.Mesh1D method}, \hyperpage{10}
-  \item \spxentry{add\_nodes()}\spxextra{mesh.Mesh1D\_SPM method}, \hyperpage{10}
+  \item \spxentry{add\_node()}\spxextra{mesh.Mesh1D method}, \hyperpage{11}
+  \item \spxentry{add\_node()}\spxextra{mesh.Mesh1D\_SPM method}, \hyperpage{12}
+  \item \spxentry{add\_nodes()}\spxextra{mesh.Mesh1D method}, \hyperpage{11}
+  \item \spxentry{add\_nodes()}\spxextra{mesh.Mesh1D\_SPM method}, \hyperpage{12}
+  \item \spxentry{apply\_dirichlet\_bc()}\spxextra{in module solver}, \hyperpage{13}
+  \item \spxentry{apply\_neumann\_bc()}\spxextra{in module solver}, \hyperpage{13}
+
+  \indexspace
+  \bigletter B
+  \item \spxentry{batterycell}
+    \subitem \spxentry{module}, \hyperpage{9}
+  \item \spxentry{BatteryCell}\spxextra{class in batterycell}, \hyperpage{9}
+
+  \indexspace
+  \bigletter C
+  \item \spxentry{calculate\_effective\_area()}\spxextra{electrode.Electrode method}, 
+		\hyperpage{10}
+  \item \spxentry{calculate\_surface\_concentration()}\spxextra{in module solver}, \hyperpage{13}
+  \item \spxentry{create\_anode()}\spxextra{batterycell.BatteryCell method}, \hyperpage{9}
+  \item \spxentry{create\_cathode()}\spxextra{batterycell.BatteryCell method}, \hyperpage{9}
+  \item \spxentry{create\_potential\_lookup\_tables()}\spxextra{electrode.Electrode method}, 
+		\hyperpage{10}
 
   \indexspace
   \bigletter D
   \item \spxentry{derivative}
-    \subitem \spxentry{module}, \hyperpage{9}
+    \subitem \spxentry{module}, \hyperpage{10}
+
+  \indexspace
+  \bigletter E
+  \item \spxentry{electrode}
+    \subitem \spxentry{module}, \hyperpage{10}
+  \item \spxentry{Electrode}\spxextra{class in electrode}, \hyperpage{10}
+  \item \spxentry{electrode\_potential()}\spxextra{electrode.Electrode method}, \hyperpage{10}
+  \item \spxentry{euler\_step()}\spxextra{in module solver}, \hyperpage{13}
 
   \indexspace
   \bigletter F
-  \item \spxentry{first\_derivative()}\spxextra{in module derivative}, \hyperpage{9}
+  \item \spxentry{first\_derivative()}\spxextra{in module derivative}, \hyperpage{10}
 
   \indexspace
   \bigletter G
-  \item \spxentry{get\_concentration\_by\_id()}\spxextra{mesh.Mesh1D\_SPM method}, \hyperpage{11}
+  \item \spxentry{get\_concentration\_by\_id()}\spxextra{mesh.Mesh1D\_SPM method}, \hyperpage{12}
+  \item \spxentry{get\_voltage()}\spxextra{batterycell.BatteryCell method}, \hyperpage{9}
 
   \indexspace
   \bigletter M
   \item \spxentry{mesh}
-    \subitem \spxentry{module}, \hyperpage{10}
-  \item \spxentry{Mesh1D}\spxextra{class in mesh}, \hyperpage{10}
-  \item \spxentry{Mesh1D\_SPM}\spxextra{class in mesh}, \hyperpage{10}
+    \subitem \spxentry{module}, \hyperpage{11}
+  \item \spxentry{Mesh1D}\spxextra{class in mesh}, \hyperpage{11}
+  \item \spxentry{Mesh1D\_SPM}\spxextra{class in mesh}, \hyperpage{11}
+  \item \spxentry{mesh\_initialize()}\spxextra{electrode.Electrode method}, \hyperpage{11}
   \item \spxentry{module}
-    \subitem \spxentry{derivative}, \hyperpage{9}
-    \subitem \spxentry{mesh}, \hyperpage{10}
-    \subitem \spxentry{node}, \hyperpage{11}
+    \subitem \spxentry{batterycell}, \hyperpage{9}
+    \subitem \spxentry{derivative}, \hyperpage{10}
+    \subitem \spxentry{electrode}, \hyperpage{10}
+    \subitem \spxentry{mesh}, \hyperpage{11}
+    \subitem \spxentry{node}, \hyperpage{12}
+    \subitem \spxentry{plot}, \hyperpage{13}
+    \subitem \spxentry{solver}, \hyperpage{13}
 
   \indexspace
   \bigletter N
   \item \spxentry{node}
-    \subitem \spxentry{module}, \hyperpage{11}
-  \item \spxentry{Node}\spxextra{class in node}, \hyperpage{11}
-  \item \spxentry{Node\_SPM}\spxextra{class in node}, \hyperpage{11}
+    \subitem \spxentry{module}, \hyperpage{12}
+  \item \spxentry{Node}\spxextra{class in node}, \hyperpage{12}
+  \item \spxentry{Node\_SPM}\spxextra{class in node}, \hyperpage{12}
+
+  \indexspace
+  \bigletter P
+  \item \spxentry{plot}
+    \subitem \spxentry{module}, \hyperpage{13}
+  \item \spxentry{plot\_concentration()}\spxextra{in module plot}, \hyperpage{13}
+  \item \spxentry{plot\_voltage()}\spxextra{in module plot}, \hyperpage{13}
 
   \indexspace
   \bigletter S
-  \item \spxentry{second\_derivative()}\spxextra{in module derivative}, \hyperpage{9}
+  \item \spxentry{second\_derivative()}\spxextra{in module derivative}, \hyperpage{10}
+  \item \spxentry{set\_input\_current()}\spxextra{electrode.Electrode method}, \hyperpage{11}
+  \item \spxentry{simulation\_step()}\spxextra{electrode.Electrode method}, \hyperpage{11}
+  \item \spxentry{simulation\_step()}\spxextra{in module solver}, \hyperpage{14}
+  \item \spxentry{solver}
+    \subitem \spxentry{module}, \hyperpage{13}
 
 \end{sphinxtheindex}
