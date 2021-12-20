@@ -1087,6 +1087,11 @@ INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/txfonts/t1xttsl.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/txfonts/ts1txtt.fd
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/txfonts/ts1txtt.fd
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/txfonts/ts1txtt.fd
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/txfonts/ts1txtt.fd
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/txfonts/tcxtt.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/txfonts/t1xtt.tfm
 INPUT ./libsim.ind
 INPUT libsim.ind
@@ -1106,3 +1111,4 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/tcxtt.pfb

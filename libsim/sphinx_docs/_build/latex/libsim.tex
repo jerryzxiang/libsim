@@ -558,6 +558,11 @@ The third\sphinxhyphen{}party packages required are: \sphinxtitleref{python3}, \
 The repo can be cloned from \sphinxtitleref{https://github.com/jerryzxiang/libsim.git} or
 installed via
 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\textasciigrave{}
+pip3 install git+ssh://git@github.com:jerryzxiang/libsim.git
+\textasciigrave{}}}
+
 
 \section{Modeling Batteries}
 \label{\detokenize{usage:modeling-batteries}}
@@ -569,6 +574,11 @@ segments, the simulation time in seconds, and the time steps. An example is
 shown here for an LIB with an LFP cathode and graphite anode:
 
 \sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\textasciigrave{}
+\$ python3 main.py LFP graphite 0.5 2.3 1.5 10 10 0.001
+\textasciigrave{}}}
+
+\sphinxAtStartPar
 To get help, use \sphinxtitleref{python3 main.py \sphinxhyphen{}h’}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -576,10 +586,20 @@ To get help, use \sphinxtitleref{python3 main.py \sphinxhyphen{}h’}.
 \end{sphinxVerbatim}
 
 
-\chapter{Profiling}
-\label{\detokenize{profiling:profiling}}\label{\detokenize{profiling::doc}}
+\chapter{Profiling and Tuning Results}
+\label{\detokenize{profiling:profiling-and-tuning-results}}\label{\detokenize{profiling::doc}}
 \sphinxAtStartPar
-TO DO
+We ran an initial profiling assessment using cProfile on the alpha version of libsim.
+By far the slowest function in terms of runtime was simulation\_step within the electrode
+class. From that analysis, it became clear that the function was a bit overloaded with
+tasks. We then refactored the stepper code into a new separate solver file to reduce
+some of this complexity. As a result, the runtime of this electrode code was reduced
+by around 90\%, from 1.5 seconds to 0.15 seconds.
+
+\sphinxAtStartPar
+At this point, the longest running portion of the code is that associated with the
+creation and plotting of the output graphs. These functions are integral to the
+usage of the library, and are executed in an efficient manner as of now utilizing pyplot.
 
 
 \chapter{Lessons Learned}
