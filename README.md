@@ -19,7 +19,7 @@ python3 main.py 'LFP' 'graphite' 0.5 2.3 1.5 10 10 0.001
 To get help, use 
 
 ```
-python3 main.py -h'`
+python3 main.py -h
 ```
 
 
